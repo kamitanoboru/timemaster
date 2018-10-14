@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->time('start_time')->default("09:30");
+            $table->string('user_type',8)->default("free");
             $table->rememberToken();
             $table->timestamps();
         });
