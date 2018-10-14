@@ -5,7 +5,11 @@
         <div class="cover-inner">
             <div class="cover-contents">
                 <h1>TIME MASTER</h1>
-                <a href="" class="btn btn-success btn-lg">時間の効率化を手にしますか?</a>
+                @if (Auth::check())
+                    <a href="{{ route('signup.get') }}" class="btn btn-success btn-lg">マイタイムに行く</a>
+                @else
+                <a href="/signup" class="btn btn-success btn-lg">時間の効率化を手にしますか?</a>
+                @endif
             </div>
         </div>
     </div>
@@ -13,4 +17,6 @@
 
 @section('content')
     テスト
+    
+
 @endsection

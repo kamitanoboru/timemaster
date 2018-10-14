@@ -16,3 +16,28 @@ Route::get('/', 'WelcomeController@index');
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
+
+// ログイン認証
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login')->name('login.post');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+//　ログイン認証付きのルーティング
+//Route::group(['middleware' => ['auth']], function () {
+
+    //タスクの登録、変更、削除など
+    //タスクの明日以降の未完了の表示
+    //Route::resource('tasks', 'TasksController', ['only' => ['index','show', 'create', 'store' ,'update','edit','destroy','future','memoshow','memoedit','print']]);
+
+
+    //ユーザー情報の変更と削除
+    //Route::resource('users', 'UsersController', ['only' => ['update','edit','destroy']]);
+    Route::get('users/edit', 'UsersController@edit')->name('users.edit');
+    Route::post('users/update', 'UsersController@update')->name('users.update');
+    Route::post('users/destroy', 'UsersController@destroy')->name('users.destroy');    
+    // マイタイムの表示
+    Route::resource('/mytime', 'UsersController', ['only' => ['index']]);
+
+
+
+//});
