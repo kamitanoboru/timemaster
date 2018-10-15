@@ -11,7 +11,7 @@ $user = Auth::user();
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
 
-        <h3>{{ $user ->name }}さん のアカウント編集ページ</h3>
+        <h3>{{ $user ->name }}さん のアカウント編集</h3>
 
     {!! Form::model($user, ['route' => ['users.update'], 'method' => 'post']) !!}
     
@@ -32,6 +32,17 @@ $user = Auth::user();
         {!! Form::label('start_time', 'スタート時間(今日のタスクの開始時間)') !!}
         {!! Form::text('start_time',$user -> start_time,['class'=>'form-control']) !!}
         </div>
+        
+        <div class="form-group">
+        {!! Form::label('password', 'パスワード') !!}
+        {!! Form::password('password', ['class' => 'form-control']) !!}
+        </div>
+
+        <div class="form-group">
+        {!! Form::label('password_confirmation', 'パスワード（確認）') !!}
+        {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+        </div>
+                    
         {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
 
     {!! Form::close() !!}
@@ -42,7 +53,7 @@ $user = Auth::user();
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-lg-offset-3 col-lg-6">
 
-        <h3>{{ $user ->name }}さん のアカウント削除ページ</h3>
+        <h3>{{ $user ->name }}さん のアカウント削除</h3>
 
     {!! Form::model($user, ['route' => ['users.destroy'], 'method' => 'post']) !!}
     

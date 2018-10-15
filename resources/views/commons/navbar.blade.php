@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="#">
+                            <a href="/tasks/create">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 NEW TASK
                               </a>
@@ -32,7 +32,11 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">マイタイム</a>
+                                    <a href="/mytime">マイタイム</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                                                <li>
+                                    <a href="/tasks/future">今後のタスク一覧</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>

@@ -25,10 +25,15 @@ class UsersController extends Controller
         if($id != $request->user_id){
             $message="経路エラーのため更新は行われませんでした";
             $redirect="マイタイムページ";
-          return view('commons/completed',['message' => $message,'redirect' => $redirect]);
- 
+            $url="/mytime";
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         }
         
+        $this->validate($request, [
+            'name' => 'required|max:191',
+            'email' => 'required|max:191',
+            'start_time' => 'required|max:8',
+        ]);
         
         //同じ場合、そのidのユーザー情報をPOSTされたデータで更新する
         //パスワードがnullかどうかで分岐
@@ -42,11 +47,23 @@ class UsersController extends Controller
         
         //パスワードがnullでない場合
         }else{
+            
+            if($request->password != $request->password_confirmation){
+            $message="パスワード不一致のため更新は行われませんでした";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);                
+            }
+            
+            //start_timeの秒数は削除する
+            $start_time = $request->start_time;
+$start_time=date('H:i',strtotime($start_time));
+            
             $request->user()->where('id', $id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => $request->password,
-                'start_time' => $request->start_time,
+                'password' => bcrypt($request->password),
+                'start_time' => $start_time,
             ]);    
             
         }
@@ -73,7 +90,9 @@ class UsersController extends Controller
         if($id != $request->user_id){
             $message="経路エラーのためアカウント削除は行われませんでした";
             $redirect="マイタイムページ";
-          return view('commons/completed',['message' => $message,'redirect' => $redirect]);
+            $url="/mytime";
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+
  
         }
         

@@ -23,11 +23,26 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 //　ログイン認証付きのルーティング
-//Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     //タスクの登録、変更、削除など
     //タスクの明日以降の未完了の表示
     //Route::resource('tasks', 'TasksController', ['only' => ['index','show', 'create', 'store' ,'update','edit','destroy','future','memoshow','memoedit','print']]);
+
+//タスクの新規追加
+Route::get('tasks/create', 'TasksController@create')->name('tasks.create');
+Route::post('tasks/store', 'TasksController@store')->name('tasks.store');
+
+//今後のタスクの一覧
+Route::get('tasks/future', 'TasksController@future')->name('tasks.future');
+
+//タスクの編集
+Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');
+//タスクの編集
+Route::post('tasks/update', 'TasksController@update')->name('tasks.update');
+
+//タスクの削除
+Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');
 
 
     //ユーザー情報の変更と削除
@@ -40,4 +55,4 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
 
-//});
+});

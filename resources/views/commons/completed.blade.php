@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-{{ $message }}
+<div class="alert alert-danger" role="alert">{{ $message }}</div>
 <h3>あと5秒後に{{ $redirect }}{{ $url }}に移動します。</h3>
 
 
@@ -13,7 +13,7 @@ url = "{{ $url }}"; // 移動するアドレス
 function jumpPage() {
   location.href = url;
 }
-setTimeout("jumpPage()",waitTimer*1000)
+//setTimeout("jumpPage()",waitTimer*1000)
 //-->
 </script>
 
