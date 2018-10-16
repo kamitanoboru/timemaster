@@ -47,3 +47,53 @@ footer {
     background-color: #ed486f;
     border-color: #ed486f;
 }
+
+
+.sortable>li {
+    display: block;
+    list-style-type: none;
+    border: solid 1px cadetblue;
+    background-color: white;
+    padding: 0.8rem;
+}
+
+.item{
+    display:block;
+    
+}
+
+.item > div{
+    display:inline-block;
+}
+
+.item > .time{
+    width: 15rem;
+    margin: 0 1rem;
+}
+
+.item > .edit{
+    margin-right: 0.6rem;
+}
+
+.item > .ok{
+    width:3rem;
+    float:right;
+}
+
+.item > .dd{
+    width:3rem;
+    float:right;
+}
+
+.item .glyphicon{
+    
+    font-size:2rem;
+    
+}
+
+
+
+
+
+
+

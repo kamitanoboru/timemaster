@@ -13,7 +13,7 @@ url = "{{ $url }}"; // 移動するアドレス
 function jumpPage() {
   location.href = url;
 }
-//setTimeout("jumpPage()",waitTimer*1000)
+setTimeout("jumpPage()",waitTimer*1000)
 //-->
 </script>
 

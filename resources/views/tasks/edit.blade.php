@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_mini')
 
 @section('content')
 
@@ -84,7 +84,7 @@ $user = Auth::user();
 
     {!! Form::model($task, ['route' => ['tasks.destroy'], 'method' => 'post']) !!}
     
-        <div class="form-group">
+        <div class="form-group"　name="destroy">
 @if($task -> type == 'repeat')
 このタスクはタイプが「繰り返し」です。今後も繰り返さず完全に削除するには、以下にチェックを入れてください。
 <br>完全に削除する<input type="checkbox" name="repeat_del">

@@ -127,9 +127,73 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function mytime_get()
     {
-        //
+
+    //ユーザー認証して、そのユーザーのタスクを取得
+        $id=\Auth::id();
+        $user=User::find($id);
+    //その人のスタート時間も取得
+    $start_time=$user -> start_time;
+    $start_time=substr($start_time, 0, 5);
+
+        $today=date('Y-m-d');    
+
+    //表示用の抽出、ソート
+    //本日以前のタスクで、未完了のもの、task_order順、zone順
+       $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
+    
+    
+    //これを配列$tasksとしてviewに渡す
+
+
+    return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
+    
+    }
+
+    public function mytime_post(Request $request)
+    {
+
+
+    //ユーザー認証して、そのユーザーのタスクを取得
+        $id=\Auth::id();
+        $user=User::find($id);
+
+    //その人のスタート時間も取得してあるもので作成
+        $start_time=$request -> hour.":".$request -> min;
+        
+    //順序をテーブルに書き換える
+    $orders=explode(',', $request -> result);
+    //タスクがなくボタンを押されたら例外処理
+    if(count($orders)==0){
+        "WOOPS!";
+        exit;
+    }    
+    
+    $new_order=1;
+    foreach($orders as $order){
+        $array=explode("-",$order);
+        $task_id=$array[0];
+        
+        //$task_idのタスクをtask_orderの値を$new_orderで書き換えする
+        $request->user()->tasks()->where('id',$task_id)->update([
+            'task_order' => $new_order,
+        ]);
+
+        ++$new_order;
+        
+    }
+    
+        $today=date('Y-m-d');    
+
+    //表示用の抽出、ソート
+    //本日以前のタスクで、未完了のもの、task_order順、zone順
+       $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
+    
+    
+    //これを配列$tasksとしてviewに渡す
+    return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
+    
     }
 
     /**
@@ -209,7 +273,7 @@ class TasksController extends Controller
         
         
         //更新処理
-                //新規登録する
+    
         $request->user()->tasks()->where('id',$request -> task_id)->update([
             'title' => $request->title,
             'type' => $request->type,
@@ -229,6 +293,40 @@ class TasksController extends Controller
             
             
     }
+    
+    
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+     
+    public function destroy_before($id)
+    {
+        
+        //そのidからtaskデータを取得
+        $task=Task::find($id);
+        
+        //ユーザーチェック
+        //ユーザー認証からユーザーidを得る
+        $id=\Auth::id();
+        
+        //一応POSTされた$user_idがそれと同じがチェックする
+        //同じでなければ、ログアウトさせてしまう
+        if($id != $task->user_id){
+            $message="経路エラーのため更新は行われませんでした";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }        
+    
+        
+        
+        //編集フォームおよび削除ボタンのあるbladeに渡す
+        return view('tasks/destroy_before',['task'=> $task]);
+    }
+    
 
     /**
      * Remove the specified resource from storage.

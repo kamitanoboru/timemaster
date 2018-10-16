@@ -30,7 +30,26 @@ $user = Auth::user();
 
         <div class="form-group">
         {!! Form::label('start_time', 'スタート時間(今日のタスクの開始時間)') !!}
-        {!! Form::text('start_time',$user -> start_time,['class'=>'form-control']) !!}
+@php
+$start=$user -> start_time;
+$tArry_s=explode(":",$start);
+$start=$tArry_s[0].":".$tArry_s[1];
+
+@endphp
+        
+<div class="input-group clockpicker">
+    <input type="text" name="start_time" class="form-control" value="{{ $start }}">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
+<script type="text/javascript">
+
+$('.clockpicker').clockpicker();
+
+</script>
+
+
         </div>
         
         <div class="form-group">

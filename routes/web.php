@@ -36,12 +36,20 @@ Route::post('tasks/store', 'TasksController@store')->name('tasks.store');
 //今後のタスクの一覧
 Route::get('tasks/future', 'TasksController@future')->name('tasks.future');
 
+//マイタイムの表示
+
+Route::get('mytime', 'TasksController@mytime_get')->name('tasks.mytime_get');
+
+Route::post('mytime', 'TasksController@mytime_post')->name('tasks.mytime_post');
+
+
 //タスクの編集
 Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');
 //タスクの編集
 Route::post('tasks/update', 'TasksController@update')->name('tasks.update');
 
 //タスクの削除
+Route::get('tasks/{id}/destroy', 'TasksController@destroy_before')->name('tasks.destroy_before');
 Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');
 
 
@@ -51,8 +59,7 @@ Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');
     Route::post('users/update', 'UsersController@update')->name('users.update');
     Route::post('users/destroy', 'UsersController@destroy')->name('users.destroy');    
     // マイタイムの表示
-    Route::resource('/mytime', 'UsersController', ['only' => ['index']]);
-
+    //Route::resource('/mytime', 'UsersController', ['only' => ['index']]);
 
 
 });
