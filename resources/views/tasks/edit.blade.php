@@ -64,13 +64,13 @@ $tomorrow=date('Y-m-d', strtotime('+1 day'));
         </div>    
         
         
-        <div class="form-group">        
-        {!! Form::label('task_time', '所要時間:') !!}
+        <div class="form-group form-little">
+        {!! Form::label('task_time', '所要時間:') !!}<br>
         <input type="number" value="{{ $hours }}" id="height" name="task_time_hours" placeholder="5分刻みで設定できます" step="1" value="0" style="width: 4rem;"/>時間
         <input type="number" value="{{ $mins }}" id="height" name="task_time_mins" placeholder="5分刻みで設定できます" step="5" value="20" style="width: 4rem;"/>分
         </div>           
-        <div class="form-group">        
-        {!! Form::label('type', 'タイプ:') !!}
+        <div class="form-group form-little">
+        {!! Form::label('type', 'タイプ:') !!}<br>
         @php
         if($task -> type == 'single'){
             $single="true";
@@ -83,8 +83,8 @@ $tomorrow=date('Y-m-d', strtotime('+1 day'));
         
         {{Form::radio('type', 'single', $single)}}単発　{{Form::radio('type', 'repeat',$repeat)}}繰り返し
         </div>
-        <div>
-         {!! Form::label('zone', '時間帯:') !!}
+         <div class="form-group form-little"> 
+         {!! Form::label('zone', '時間帯:') !!}<br>
         {{Form::select('zone', [
            '1' => '1(早朝)',
            '2' => '2(午前中)',

@@ -180,3 +180,10 @@ background-color: greenyellow;
  
 }
 
+.form-little {
+    display: inline-block;
+    width: 30%;
+     border: solid 0.5px lightgray;
+    margin-left: 1rem;
+    padding: 5px;
+}
