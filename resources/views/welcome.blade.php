@@ -16,7 +16,7 @@
 @endsection
 
 @section('content')
-    テスト
+    
     
 
 @endsection

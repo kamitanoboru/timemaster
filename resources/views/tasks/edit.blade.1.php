@@ -26,19 +26,11 @@ $user = Auth::user();
         </div>
  
         <h3><span class="label label-success">以下詳細設定</span></h3>
-@php
-$today_date=date('Y-m-d');
-$tomorrow=date('Y-m-d', strtotime('+1 day'));
-@endphp
+
         
         <div class="form-group" id="datepicker-startview">
 
-  <label for="start_date">開始日(デフォルトは明日)</label>
-  <span class="label label-info" id="today">今日</span>
-  <span class="label label-info" id="plus1">＋1</span>
-  <span class="label label-info" id="plus2">＋2</span>
-  <span class="label label-info" id="plus7">＋7</span>
-  
+  <label for="start_date">開始日</label><span id="today">今日に変更する</span>
   <div>
     <div class="input-group date">
       <input type="text"  name="start_date" size="10" id="start_date" class="form-control" value="{{ $task->start_date }}">
@@ -48,8 +40,6 @@ $tomorrow=date('Y-m-d', strtotime('+1 day'));
     </div>
   </div>
 </div>
-   
-    <div class="alert alert-info" role="alert">本日は{{ $today_date }}です</div>
 
         
         <div class="form-group">
@@ -165,64 +155,6 @@ $(function(){
     });
     
 });    
-
-
-$(function(){
-    $("#today").click(function(){
-
-    //今日の日付データを変数todayに格納
-    var theday=new Date(); 
-    var y = theday.getFullYear();
-    var m = theday.getMonth()+1; 
-    var d = theday.getDate();
-    var start_day = y +'-'+m+'-'+d;    
-    $("#start_date").val(start_day);
-    });
-    
-    $("#plus1").click(function(){
-
-    //今日の日付データを変数thedayに格納
-    var theday=new Date(); 
-    theday.setDate(theday.getDate() + 1);
-    //明日
-    var y = theday.getFullYear();
-    var m = theday.getMonth()+1; 
-    var d = theday.getDate();
-    var start_day = y +'-'+m+'-'+d;
-    $("#start_date").val(start_day);
-    });
-    
-    $("#plus2").click(function(){
-
-    //今日の日付データを変数thedayに格納
-    var theday=new Date(); 
-    theday.setDate(theday.getDate() + 2);
-    //明日
-    var y = theday.getFullYear();
-    var m = theday.getMonth()+1; 
-    var d = theday.getDate();
-    var start_day = y +'-'+m+'-'+d;
-    $("#start_date").val(start_day);
-    });
-    
-
-    $("#plus7").click(function(){
-
-    //今日の日付データを変数thedayに格納
-    var theday=new Date(); 
-    theday.setDate(theday.getDate() + 7);
-    //明日
-    var y = theday.getFullYear();
-    var m = theday.getMonth()+1; 
-    var d = theday.getDate();
-    var start_day = y +'-'+m+'-'+d;
-    $("#start_date").val(start_day);
-    });    
-    
-    
-    
-});
-    
     
 </script>    
 

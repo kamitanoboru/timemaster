@@ -49,7 +49,9 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-//バリデーション
+        
+
+        //バリデーション
        $this->validate($request, [
             'title' => 'required|max:191',
             'type' => 'required|string',
@@ -76,9 +78,16 @@ class TasksController extends Controller
         $hours=$request->task_time_hours;
         $mins=$request -> task_time_mins;
         $task_time=$hours*60 + $mins;
-
+        
+        if($request -> fix_start != null){
+            $fix_start=($request -> fix_start).':00';
+        }else{
+            $fix_start=null;
+        }
+        
 
         //新規登録する
+        //task_orderは一番最上位にした
         $request->user()->tasks()->create([
             'user_id' => $id,
             'title' => $request->title,
@@ -86,13 +95,15 @@ class TasksController extends Controller
             'start_date' => $request->start_date,
             'task_time' => $task_time,
             'zone' => $request->zone,
+            'task_order' => '0',
             'memo' => $request->memo,
+            'fix_start' => $fix_start,
         ]);
 
         //処理完了ページにメッセージとともに飛ばす
         $message="タスク登録されました";
-        $redirect="マイタイムページ";
-        $url="/mytime";
+        $redirect="新規タスク追加ページ";
+        $url="/tasks/create";
         return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
 
     }
@@ -130,24 +141,36 @@ class TasksController extends Controller
     public function mytime_get()
     {
 
-    //ユーザー認証して、そのユーザーのタスクを取得
-        $id=\Auth::id();
-        $user=User::find($id);
-    //その人のスタート時間も取得
-    $start_time=$user -> start_time;
-    $start_time=substr($start_time, 0, 5);
+        //ユーザー認証して、そのユーザーのタスクを取得
+            $id=\Auth::id();
+            $user=User::find($id);
+        //その人のスタート時間も取得
+        $start_time=$user -> start_time;
 
-        $today=date('Y-m-d');    
+        //現在時間から10分後
+        $timestamp = strtotime( "+10 minutes" );
+        $now = date("H:i:s",$timestamp);
 
-    //表示用の抽出、ソート
-    //本日以前のタスクで、未完了のもの、task_order順、zone順
-       $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
-    
-    
-    //これを配列$tasksとしてviewに渡す
+        //比較して後の方を有効とする
+        if(strtotime($start_time) < strtotime($now)){
+            $start_time = $now;
+        }
+
+        //秒数部分を省く
+        $start_time=substr($start_time, 0, 5);
 
 
-    return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
+            $today=date('Y-m-d');    
+
+        //表示用の抽出、ソート
+        //本日以前のタスクで、未完了のもの、task_order順、zone順
+           $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
+
+
+        //これを配列$tasksとしてviewに渡す
+
+
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
     
     }
 
@@ -155,44 +178,44 @@ class TasksController extends Controller
     {
 
 
-    //ユーザー認証して、そのユーザーのタスクを取得
-        $id=\Auth::id();
-        $user=User::find($id);
+        //ユーザー認証して、そのユーザーのタスクを取得
+            $id=\Auth::id();
+            $user=User::find($id);
 
-    //その人のスタート時間も取得してあるもので作成
-        $start_time=$request -> hour.":".$request -> min;
-        
-    //順序をテーブルに書き換える
-    $orders=explode(',', $request -> result);
-    //タスクがなくボタンを押されたら例外処理
-    if(count($orders)==0){
-        "WOOPS!";
-        exit;
-    }    
-    
-    $new_order=1;
-    foreach($orders as $order){
-        $array=explode("-",$order);
-        $task_id=$array[0];
-        
-        //$task_idのタスクをtask_orderの値を$new_orderで書き換えする
-        $request->user()->tasks()->where('id',$task_id)->update([
-            'task_order' => $new_order,
-        ]);
+        //その人のスタート時間も取得してあるもので作成
+            $start_time=$request -> hour.":".$request -> min;
 
-        ++$new_order;
-        
-    }
-    
+        //順序をテーブルに書き換える
+        $orders=explode(',', $request -> result);
+        //タスクがなくボタンを押されたら例外処理
+        if(count($orders)==0){
+            "WOOPS!";
+            exit;
+        }    
+
+        $new_order=1;
+        foreach($orders as $order){
+            $array=explode("-",$order);
+            $task_id=$array[0];
+
+            //$task_idのタスクをtask_orderの値を$new_orderで書き換えする
+            $request->user()->tasks()->where('id',$task_id)->update([
+                'task_order' => $new_order,
+            ]);
+
+            ++$new_order;
+
+        }
+
         $today=date('Y-m-d');    
 
-    //表示用の抽出、ソート
-    //本日以前のタスクで、未完了のもの、task_order順、zone順
-       $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
-    
-    
-    //これを配列$tasksとしてviewに渡す
-    return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
+        //表示用の抽出、ソート
+        //本日以前のタスクで、未完了のもの、task_order順、zone順
+           $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
+
+
+        //これを配列$tasksとしてviewに渡す
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
     
     }
 
@@ -208,6 +231,11 @@ class TasksController extends Controller
         //そのidからtaskデータを取得
         $task=Task::find($id);
         
+        if($task == null){
+            echo "そのタスクはすでに削除されています";
+            exit;
+        }
+        
         //ユーザーチェック
         //ユーザー認証からユーザーidを得る
         $id=\Auth::id();
@@ -218,7 +246,7 @@ class TasksController extends Controller
             $message="経路エラーのため更新は行われませんでした";
             $redirect="マイタイムページ";
             $url="/mytime";
-        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         }        
     
 
@@ -241,7 +269,7 @@ class TasksController extends Controller
      */
     public function update(Request $request)
     {
-//バリデーション
+        //バリデーション
        $this->validate($request, [
             'title' => 'required|max:191',
             'type' => 'required|string',
@@ -262,7 +290,7 @@ class TasksController extends Controller
             $message="経路エラーのため更新は行われませんでした";
             $redirect="マイタイムページ";
             $url="/mytime";
-        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         }    
         
             
@@ -270,6 +298,12 @@ class TasksController extends Controller
         $hours=$request->task_time_hours;
         $mins=$request -> task_time_mins;
         $task_time=$hours*60 + $mins;
+        
+        if($request -> fix_start != null){
+            $fix_start=($request -> fix_start).':00';
+        }else{
+            $fix_start=null;
+        }
         
         
         //更新処理
@@ -281,6 +315,7 @@ class TasksController extends Controller
             'task_time' => $task_time,
             'zone' => $request->zone,
             'memo' => $request->memo,
+            'fix_start' => $fix_start,
         ]);
         
 
@@ -288,7 +323,7 @@ class TasksController extends Controller
         $message="タスク更新されました";
         $redirect="マイタイムページ";
         $url="/mytime";
-        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         
             
             
@@ -307,6 +342,12 @@ class TasksController extends Controller
         
         //そのidからtaskデータを取得
         $task=Task::find($id);
+        if($task == null){
+            $message="すでにそのタスクは削除されています";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }   
         
         //ユーザーチェック
         //ユーザー認証からユーザーidを得る
@@ -318,7 +359,7 @@ class TasksController extends Controller
             $message="経路エラーのため更新は行われませんでした";
             $redirect="マイタイムページ";
             $url="/mytime";
-        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         }        
     
         
@@ -350,7 +391,7 @@ class TasksController extends Controller
             $message="経路エラーのため更新は行われませんでした";
             $redirect="マイタイムページ";
             $url="/mytime";
-        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         }    
                 
         
@@ -383,7 +424,7 @@ class TasksController extends Controller
         $message="タスクが削除されました";
         $redirect="マイタイムページ";
         $url="/mytime";
-        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
         
     }
 }

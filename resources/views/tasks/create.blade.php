@@ -18,11 +18,56 @@ $user = Auth::user();
         {!! Form::text('title',null,['class'=>'form-control']) !!}
         </div>
         {!! Form::submit('タスク追加', ['class' => 'btn btn-primary']) !!}
-        <div>以下詳細設定</div>
+        <h3><span class="label label-success">以下詳細設定</span></h3>
+        
+        <!--
         <div class="form-group">        
         {!! Form::label('start_date', '開始日:') !!}
         {{Form::date('start_date', \Carbon\Carbon::tomorrow())}}
         </div>    
+        -->
+@php
+$today_date=date('Y-m-d');
+$tomorrow=date('Y-m-d', strtotime('+1 day'));
+@endphp
+<div class="form-group" id="datepicker-startview">
+
+  <label for="start_date">開始日(デフォルトは明日)</label>
+  <span class="label label-info" id="today">今日</span>
+  <span class="label label-info" id="plus1">＋1</span>
+  <span class="label label-info" id="plus2">＋2</span>
+  <span class="label label-info" id="plus7">＋7</span>
+  
+
+  <div>
+    <div class="input-group date">
+      <input type="text"  name="start_date" size="10" id="start_date" class="form-control" value="{{ $tomorrow }}">
+      <span class="input-group-addon">
+        <i class="glyphicon glyphicon-th"></i>
+      </span>
+    </div>
+  </div>
+</div>
+
+   
+    <div class="alert alert-info" role="alert">本日は{{ $today_date }}です</div>
+    
+        <div class="form-group">
+        {!! Form::label('fix_start', 'タスクの開始指定時間(未記入OK)') !!}
+
+<div class="input-group clockpicker">
+    <input type="text" name="fix_start" class="form-control" value="">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-time"></span>
+    </span>
+</div>
+<script type="text/javascript">
+$('.clockpicker').clockpicker();
+</script>
+        </div>    
+    
+    
+
         <div class="form-group">        
         {!! Form::label('task_time', '所要時間:') !!}
         <input type="number" id="height" name="task_time_hours" placeholder="5分刻みで設定できます" step="1" value="0" style="width: 4rem;"/>時間
@@ -48,8 +93,8 @@ $user = Auth::user();
         
         </div>
         <div class="form-group">
-        {!! Form::label('memo', 'メモ:') !!}
-        {!! Form::textarea('memo',null,['class'=>'form-control']) !!}
+        {!! Form::label('memo', 'メモ:') !!}<span id="toggle">表示する</span>
+        {!! Form::textarea('memo',null,['class'=>'form-control','style'=>'display:none;']) !!}
         </div>
 
 
@@ -58,5 +103,97 @@ $user = Auth::user();
     {!! Form::close() !!}
     </div>
 </div>
+
+<script>
+$(function(){
+    $("#toggle").click(function(){
+        $("#memo").toggle();
+
+        if($("#toggle").text() =='表示する'){
+             $("#toggle").text('閉じる');
+             }else{
+              $("#toggle").text('表示する'); 
+             }
+    });
+});
+    
+$(function(){
+    //Default
+    $('#datepicker-default .date').datepicker({
+        format: "yyyy年mm月dd日",
+        language: 'ja',
+        autoclose: true
+    });
+    
+});    
+
+$(function(){
+    $('#datepicker-startview .date').datepicker({
+        startView: 1,
+        language: "ja",
+        autoclose: true
+    });
+});
+
+
+
+$(function(){
+    $("#today").click(function(){
+
+    //今日の日付データを変数todayに格納
+    var theday=new Date(); 
+    var y = theday.getFullYear();
+    var m = theday.getMonth()+1; 
+    var d = theday.getDate();
+    var start_day = y +'-'+m+'-'+d;    
+    $("#start_date").val(start_day);
+    });
+    
+    $("#plus1").click(function(){
+
+    //今日の日付データを変数thedayに格納
+    var theday=new Date(); 
+    theday.setDate(theday.getDate() + 1);
+    //明日
+    var y = theday.getFullYear();
+    var m = theday.getMonth()+1; 
+    var d = theday.getDate();
+    var start_day = y +'-'+m+'-'+d;
+    $("#start_date").val(start_day);
+    });
+    
+    $("#plus2").click(function(){
+
+    //今日の日付データを変数thedayに格納
+    var theday=new Date(); 
+    theday.setDate(theday.getDate() + 2);
+    //明日
+    var y = theday.getFullYear();
+    var m = theday.getMonth()+1; 
+    var d = theday.getDate();
+    var start_day = y +'-'+m+'-'+d;
+    $("#start_date").val(start_day);
+    });
+    
+
+    $("#plus7").click(function(){
+
+    //今日の日付データを変数thedayに格納
+    var theday=new Date(); 
+    theday.setDate(theday.getDate() + 7);
+    //明日
+    var y = theday.getFullYear();
+    var m = theday.getMonth()+1; 
+    var d = theday.getDate();
+    var start_day = y +'-'+m+'-'+d;
+    $("#start_date").val(start_day);
+    });    
+    
+    
+    
+});
+    
+    
+</script>
 
 @endsection

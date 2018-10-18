@@ -8,7 +8,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                @if (Auth::check())
+                <a class="navbar-left" href="/mytime"><img src="{{ secure_asset("images/logo.png") }}" alt="Monolist"></a>
+                @else
                 <a class="navbar-left" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="Monolist"></a>
+                @endif
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
