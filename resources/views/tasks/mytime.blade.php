@@ -163,8 +163,13 @@ $i=$i+1;
 </form>
 
 @else
-<div class="alert alert-success" role="alert">本日以前が開始日となっている未完了のタスクはありません</div>
-
+<div style=text-align:center;"">
+    <div class="alert alert-success" role="alert">本日以前が開始日となっている未完了のタスクはありません
+    <div>
+    <div>
+    <a href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i>からタスクの追加ができます</a>
+    </div>
+</div>
 @endif
 
 
