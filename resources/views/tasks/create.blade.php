@@ -96,7 +96,7 @@ $('.clockpicker').clockpicker();
 
     </div>
         <div class="form-group">
-        {!! Form::label('memo', 'メモ:') !!}<span id="toggle">表示する</span>
+        {!! Form::label('memo', 'メモ:') !!}<span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button" style="font-size:3rem;"></span><span id="toggle">表示する</span>
         {!! Form::textarea('memo',null,['class'=>'form-control','style'=>'display:none;']) !!}
         </div>
 

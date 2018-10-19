@@ -3,6 +3,7 @@
 @section('content')
 
 
+
 <!-- ここにページ毎のコンテンツを書く -->
 @php
 //ログイン認証
@@ -22,15 +23,43 @@ $sum_end=$hour+$tArry[1];//分だけを足す
 
 //タスクをli表示する時の表示番号
 $i=1;
+
+$today=date("Y-m-d");
+
+//曜日取得
+//配列を使用し、要素順に(日:0〜土:6)を設定する
+$week = [
+  '日', //0
+  '月', //1
+  '火', //2
+  '水', //3
+  '木', //4
+  '金', //5
+  '土', //6
+];
+ 
+$date = date('w');
+$youbi=$week[$date] . '曜日';
 @endphp
 
-<h3 style="text-align: center;">今日のタスク・スケジュール({{ $max_cnt }} Tasks)</h3>
-<h4 style="text-align: center;">スタートタイム:{{ $start_time }}</h4>
+<h3 style="text-align: center;">Today's Tasks & Schedule({{ $max_cnt }} Items)</h3>
+<h4 style="text-align: center;">{{ $today }}({{ $youbi }})<i class="fas fa-running fa-3x" style="margin: 0 3rem;"></i>Start Time:{{ $start_time }}</h4>
 
 @if($max_cnt > 0)
 
 <form action="/mytime" method="post">
     {{ csrf_field() }}
+
+@if($print != "print")
+<div style="margin-left: 5rem;margin-bottom: 0.5rem;display: inline-block;width: 50%;">
+<a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
+
+<a class="navbar-left" href="/tasks/future"><i class="fas fa-arrow-alt-circle-right fa-2x" style="color:green;margin-right: 1rem;"></i></a>
+<a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
+
+<button id="submit" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
+</div>
+@endif
     <ul class="sortable buruburu">
 
 
@@ -94,8 +123,17 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
 @endphp
 
+@if($print == "print")
+{{--印刷用データの表示--}}
+@include('commons.mytime_item_print',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+
+@else
+
 {{--データの表示--}}
 @include('commons.mytime_item',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+
+@endif
+
         
 @php
 //タスクをli表示する時の表示番号をカウントアップ
@@ -107,9 +145,21 @@ $i=$i+1;
 
      </ul>
     <input type="hidden" id="result" name="result" />
-    <div class="center-block" style="text-align:center;margin-bottom:1rem;">スタート時間を<input type="text" id="hour" name="hour" size="2"/>時<input type="text" id="min" name="min" size="2"/>分にして</div>
+@if($print !="print")    
+    <div class="center-block" style="text-align:center;margin-bottom:1rem;"><i class="fas fa-running fa-2x"></i>スタート時間を<input type="text" id="hour" name="hour" style="width:3rem;">時<input type="text" id="min" name="min" style="width:3rem;">分にして
+<!--
+<button id="submit" class="btn btn-primary center-block" style="text-align:center;">再計算する</button>
+-->
 
-     <button id="submit" class="btn btn-primary center-block" style="text-align:center;">再計算する</button>
+     <button id="submit" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;" alt="再計算する"></i></button>
+
+    </div>
+@else
+<!--javascriptのエラー対策 -->
+  <input type="hidden" id="hour" name="hour" style="width:3rem;">
+  <input type="hidden" id="min" name="min" style="width:3rem;">
+
+@endif
 </form>
 
 @else
@@ -136,7 +186,7 @@ $(function() {
 jQuery(function() {
       jQuery(".sortable").sortable();
       jQuery(".sortable").disableSelection();
-      jQuery("#submit").click(function() {
+      jQuery("#submit,#submit2").click(function() {
           var result = jQuery(".sortable").sortable("toArray");
           jQuery("#result").val(result);
           jQuery("form").submit();
@@ -171,6 +221,8 @@ document.getElementById( "min" ).value = minute;
 //1分毎に表示
 mytime();
 setInterval('mytime()',1000*60);
+
+
 
 // -->
 </script>

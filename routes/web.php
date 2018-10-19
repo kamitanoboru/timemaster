@@ -42,6 +42,8 @@ Route::get('mytime', 'TasksController@mytime_get')->name('tasks.mytime_get');
 
 Route::post('mytime', 'TasksController@mytime_post')->name('tasks.mytime_post');
 
+//印刷用ページ
+Route::get('mytime/{print}', 'TasksController@mytime_get')->name('tasks.mytime_get_print');
 
 //タスクの編集
 Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');

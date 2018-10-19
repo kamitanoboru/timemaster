@@ -87,7 +87,7 @@ class TasksController extends Controller
         
 
         //新規登録する
-        //task_orderは一番最上位にした
+        //task_orderは一番下にした
         $request->user()->tasks()->create([
             'user_id' => $id,
             'title' => $request->title,
@@ -95,7 +95,7 @@ class TasksController extends Controller
             'start_date' => $request->start_date,
             'task_time' => $task_time,
             'zone' => $request->zone,
-            'task_order' => '0',
+            'task_order' => '999',
             'memo' => $request->memo,
             'fix_start' => $fix_start,
         ]);
@@ -138,9 +138,9 @@ class TasksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function mytime_get()
-    {
 
+    public function mytime_get($print=null)
+    {
         //ユーザー認証して、そのユーザーのタスクを取得
             $id=\Auth::id();
             $user=User::find($id);
@@ -170,14 +170,18 @@ class TasksController extends Controller
         //これを配列$tasksとしてviewに渡す
 
 
-        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
-    
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => $print]);
+
     }
 
     public function mytime_post(Request $request)
     {
-
-
+//チェック用
+/*
+echo $request -> result;
+echo $request -> hour;
+exit;
+*/
         //ユーザー認証して、そのユーザーのタスクを取得
             $id=\Auth::id();
             $user=User::find($id);
@@ -215,7 +219,7 @@ class TasksController extends Controller
 
 
         //これを配列$tasksとしてviewに渡す
-        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time]);
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => null]);
     
     }
 
@@ -398,14 +402,19 @@ class TasksController extends Controller
        //リピートのタスクは翌日に新規登録する
        if($task -> type == 'repeat' && $request -> repeat_del == null){
            
-        $tomorrow=date('Y-m-d', strtotime('+1 day'));   
+        $tomorrow=date('Y-m-d', strtotime('+1 day'));
+        if($request -> start_date != null){
+            $next_time=$request -> start_date;
+        }else{
+            $next_time=$tomorrow;
+        }
            
         //新規登録する
         $request->user()->tasks()->create([
             'user_id' => $id,
             'title' => $task->title,
             'type' => $task->type,
-            'start_date' => $tomorrow,
+            'start_date' => $next_time,
             'task_time' => $task ->task_time,
             'zone' => $task->zone,
             'task_order' => $task->task_order,

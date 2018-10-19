@@ -9,18 +9,16 @@
                     <span class="icon-bar"></span>
                 </button>
                 @if (Auth::check())
-                <a class="navbar-left" href="/mytime"><img src="{{ secure_asset("images/logo.png") }}" alt="Monolist"></a>
+                <a class="navbar-left" href="/mytime"><img src="{{ secure_asset("images/logo.png") }}" alt="TimeMaster"></a>
                 @else
-                <a class="navbar-left" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="Monolist"></a>
+                <a class="navbar-left" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="TimeMaster"></a>
                 @endif
+                <a class="navbar-left" href="/tasks/create" style="position: absolute;margin-top: 10px;margin-left: 10px;"><i class="fas fa-plus-circle fa-2x" style="color:red;"></i></a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="/tasks/create">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                NEW TASK
-                              </a>
+                            
                         </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

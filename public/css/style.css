@@ -171,14 +171,22 @@ footer {
 }   
 
 .each_date{
-    
     display: block;
     list-style-type: none;
 background-color: greenyellow;
     padding: 0.8rem;
     font-size: 2rem; 
- 
 }
+
+.repeat_lists{
+    display: block;
+    list-style-type: none;
+background-color: cyan;
+    padding: 0.8rem;
+    font-size: 2rem; 
+}
+
+
 
 .form-little {
     display: inline-block;
@@ -187,3 +195,47 @@ background-color: greenyellow;
     margin-left: 1rem;
     padding: 5px;
 }
+
+.form-group>#today,.form-group>#plus1,.form-group>#plus2,.form-group>#plus7,.form-group>#plus30 {
+    font-size: 1.5rem;
+}
+
+.emp_in_form{
+    margin: 1rem auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.item>.title{
+    max-width: 70%;    
+}
+
+#toggle{
+    font-size:1.3rem;
+    font-weight:bold;
+    margin-left:2rem;
+    color:blue;
+}
+
+.for-print{
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+.print-font{
+    font-weight:bold;
+}
+
+@media(max-width:667px){
+    .item > .time,.item > .title {
+        display: block;
+    }
+     .item > .dd,.item > .ok {
+        float:inherit;
+    }
+    
+    .item > .title{
+        max-width: 95%;
+    }
+    
+}    

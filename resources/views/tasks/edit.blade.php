@@ -98,7 +98,7 @@ $tomorrow=date('Y-m-d', strtotime('+1 day'));
         
         </div>
         <div class="form-group">
-        {!! Form::label('memo', 'メモ:') !!}<span id="toggle">表示する</span>
+        {!! Form::label('memo', 'メモ:') !!}<span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button" style="font-size:3rem;"></span><span id="toggle">表示する</span>
         {!! Form::textarea('memo',$task -> memo,['class'=>'form-control memo','style'=>'display:none;']) !!}
         </div>
 
@@ -118,15 +118,7 @@ $tomorrow=date('Y-m-d', strtotime('+1 day'));
 
     {!! Form::model($task, ['route' => ['tasks.destroy'], 'method' => 'post']) !!}
     
-        <div class="form-group"　name="destroy">
-@if($task -> type == 'repeat')
-このタスクはタイプが「繰り返し」です。今後も繰り返さず完全に削除するには、以下にチェックを入れてください。
-<br>完全に削除する<input type="checkbox" name="repeat_del">
-@endif
-       {!! Form::hidden('task_id',$task -> id,['class'=>'form-control']) !!}        </div>
-        {!! Form::submit('タスクを削除する', ['class' => 'btn btn-primary']) !!}
-
-    {!! Form::close() !!}
+<a href="/tasks/{{ $task -> id }}/destroy" class="btn btn-danger" role="button">削除ページ</a>
         </div>
     </div>
     
