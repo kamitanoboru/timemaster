@@ -138,12 +138,12 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
 
         {{--スマホの場合に読み込むソースを記述--}}
-        @include('commons.mytime_item_test',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
 
     @elseif ((strpos($ua, 'Android') !== false) || (strpos($ua, 'iPad') !== false))
 
         {{--タブレットの場合に読み込むソースを記述--}}
-        @include('commons.mytime_item_test',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
         
     @else
 
