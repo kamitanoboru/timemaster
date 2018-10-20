@@ -129,8 +129,28 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
 @else
 
-{{--データの表示--}}
-@include('commons.mytime_item',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+{{--通常ペーシデータの表示　但しPCとモバイルなどで分岐--}}
+    @php
+    $ua = $_SERVER['HTTP_USER_AGENT'];
+    @endphp
+
+    @if ((strpos($ua, 'Android') !== false) && (strpos($ua, 'Mobile') !== false) || (strpos($ua, 'iPhone') !== false) || (strpos($ua, 'Windows Phone') !== false))
+
+
+        {{--スマホの場合に読み込むソースを記述--}}
+        @include('commons.mytime_item_test',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+
+    @elseif ((strpos($ua, 'Android') !== false) || (strpos($ua, 'iPad') !== false))
+
+        {{--タブレットの場合に読み込むソースを記述--}}
+        @include('commons.mytime_item_test',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        
+    @else
+
+        {{--PCの場合に読み込むソースを記述--}}
+
+        @include('commons.mytime_item',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+    @endif
 
 @endif
 
@@ -226,6 +246,52 @@ document.getElementById( "min" ).value = minute;
 //1分毎に表示
 mytime();
 setInterval('mytime()',1000*60);
+
+
+$(function () {
+  $('.lichange-up').click(function() {
+    // 上要素の内容取得 
+    var prev_element = $(this).parent().parent().parent().parent().prev('li');
+    // 下要素の内容取得 
+    //var next_element = $(this).parent().parent().parent().parent().next('li');
+
+    // 設定
+    //$(this).parent().parent().parent().parent().before(next_element);
+    $(this).parent().parent().parent().parent().after(prev_element);
+    
+    // 入力欄に採番(1番目に1、2番目に2）
+    $('li.element').each(function(i){
+      // デフォルトでvalueが設定されている場合はattr('value', value)を併用
+      //$(this).find('input').attr('value', i + 1).val(i + 1);
+        var result = jQuery(".sortable").sortable("toArray");
+        jQuery("#result").val(result);
+        jQuery("form").submit();
+    });
+  });
+});
+
+
+$(function () {
+  $('.lichange-down').click(function() {
+    // 上要素の内容取得 
+    //var prev_element = $(this).parent().parent().parent().parent().prev('li');
+    // 下要素の内容取得 
+    var next_element = $(this).parent().parent().parent().parent().next('li');
+
+    // 設定
+    $(this).parent().parent().parent().parent().before(next_element);
+    //$(this).parent().parent().parent().parent().after(prev_element);
+    
+    // 入力欄に採番(1番目に1、2番目に2）
+    $('li.element').each(function(i){
+      // デフォルトでvalueが設定されている場合はattr('value', value)を併用
+      //$(this).find('input').attr('value', i + 1).val(i + 1);
+        var result = jQuery(".sortable").sortable("toArray");
+        jQuery("#result").val(result);
+        jQuery("form").submit();
+    });
+  });
+});
 
 
 
