@@ -11,7 +11,7 @@
         <tr>
             <td style="width:95%;">
 @if($task -> start_date < date('Y-m-d'))        
-      <span class="label label-default">{{ $task -> start_date }}</span>  
+      <span class="label label-default date-list">{{ $task -> start_date }}</span>  
 @endif
 @if($fix_flag == "on")        
       <i class="fas fa-skull-crossbones fa-2x"></i>
@@ -36,6 +36,7 @@ $memo=$task -> memo;
 
 @endif
 
+<a href="/tasks/{{ $task -> id }}/edit" class="modalBtn""><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 <a href="/tasks/{{ $task -> id }}/destroy" class="modalBtn destroy"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
             </td>
             <td style="width:5%;" class="lichange-down"><i class="fas fa-caret-down"></i></td>

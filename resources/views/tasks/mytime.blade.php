@@ -42,8 +42,8 @@ $date = date('w');
 $youbi=$week[$date] . '曜日';
 @endphp
 
-<h3 style="text-align: center;">Today's Tasks & Schedule({{ $max_cnt }} Items)</h3>
-<h4 style="text-align: center;">{{ $today }}({{ $youbi }})<i class="fas fa-running fa-3x" style="margin: 0 3rem;"></i>Start Time:{{ $start_time }}</h4>
+<h3 class="mytime-title">Today's Tasks & Schedule({{ $max_cnt }} Items)</h3>
+<h4 class="mytime-title">{{ $today }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
 
 @if($max_cnt > 0)
 
@@ -51,7 +51,7 @@ $youbi=$week[$date] . '曜日';
     {{ csrf_field() }}
 
 @if($print != "print")
-<div style="margin-left: 5rem;margin-bottom: 0.5rem;display: inline-block;width: 50%;">
+<div id="icons-mytime">
 <a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
 
 <a class="navbar-left" href="/tasks/future"><i class="fas fa-arrow-alt-circle-right fa-2x" style="color:green;margin-right: 1rem;"></i></a>
@@ -60,7 +60,7 @@ $youbi=$week[$date] . '曜日';
 <button id="submit" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
 @endif
-    <ul class="sortable buruburu">
+    <ul class="sortable buruburu ul-list">
 
 
 {{--//各タスクごとの表示開始--}}

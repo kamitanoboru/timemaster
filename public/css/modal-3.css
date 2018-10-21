@@ -75,7 +75,7 @@ p {
 	font-size: 14px;
 	font-weight: bold;
 	text-align: center;
-	display: inline-block;
+	/*display: inline-block;*/
 	overflow: hidden;
 	transition: all 0.2s ease-in-out;
 }

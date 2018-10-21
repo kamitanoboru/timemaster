@@ -226,7 +226,78 @@ background-color: cyan;
     font-weight:bold;
 }
 
+.mytime-title{
+    text-align:center;
+}
+
+#run-mytime{
+    margin:0 3rem;
+}
+
+#icons-mytime{
+    margin-left: 5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    width: 50%;
+}
+
 @media(max-width:667px){
+    
+    .container {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    }
+    
+    .navbar{
+    margin: 0;
+    padding: 0 15px;
+    }
+    
+    .mytime-title{
+    font-size: 1.5rem;
+    }
+    
+
+    #run-mytime{
+        margin:0 1rem;
+    }
+    
+    #icons-mytime {
+        margin: 0;
+        padding: 0 2rem;
+        display: inline-block;
+        width: 100%;
+    }
+    
+    .glyphicon {
+        font-size: 2rem;
+    }
+    
+    .date-list{
+        font-size: 1.4rem;
+        padding: 7px;
+        vertical-align: super;
+    }
+    
+    #mdWindow {
+        margin-top: -200px;
+        margin-left: auto;
+        top: 50%;
+        left: 5%;
+        width: 90%;
+        height: 300px;
+        position: fixed;
+        z-index: 98;
+        background: #fff;
+    }
+    
+    #contWrap {
+        padding: 0 0 0 10px;
+        background-color: white;    
+    }
+    
+    
     .item > .time,.item > .title {
         display: block;
     }
@@ -236,6 +307,10 @@ background-color: cyan;
     
     .item > .title{
         max-width: 95%;
+    }
+    
+    .ul-list{
+        padding:0;
     }
     
 }    
