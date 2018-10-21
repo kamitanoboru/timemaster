@@ -1,4 +1,4 @@
-<li id="{{ $task -> id }}" class="future-list">
+<li id="{{ $task -> id }}" class="future-list list-{{ $task -> id }}">
 <div class="item">
     
     

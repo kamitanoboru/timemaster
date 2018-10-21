@@ -45,10 +45,6 @@ $youbi=$week[$date] . '曜日';
 <h3 class="mytime-title">Today's Tasks & Schedule({{ $max_cnt }} Items)</h3>
 <h4 class="mytime-title">{{ $today }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
 
-@if($max_cnt > 0)
-
-<form action="/mytime" method="post">
-    {{ csrf_field() }}
 
 @if($print != "print")
 <div id="icons-mytime">
@@ -60,6 +56,13 @@ $youbi=$week[$date] . '曜日';
 <button id="submit" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
 @endif
+
+@if($max_cnt > 0)
+
+<form action="/mytime" method="post">
+    {{ csrf_field() }}
+
+
     <ul class="sortable buruburu ul-list">
 
 

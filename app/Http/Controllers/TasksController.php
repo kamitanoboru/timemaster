@@ -424,6 +424,8 @@ exit;
            
        }
        
+       //削除する前にviewにどのタスクを削除したかを知らせるために
+       $list_id="list-".$task -> id;
         
         //タスクを削除する
         $task -> delete();
@@ -433,7 +435,8 @@ exit;
         $message="タスクが削除されました";
         $redirect="マイタイムページ";
         $url="/mytime";
-        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id' => $list_id]);
         
     }
 }

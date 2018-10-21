@@ -1,4 +1,4 @@
-<li id="{{ $task -> id }}-{{ $list_i }}" class="fix-{{ $fix_flag }} mytimelist">
+<li id="{{ $task -> id }}-{{ $list_i }}" class="fix-{{ $fix_flag }} mytimelist list-{{ $task -> id }}">
     <table class="table-condensed" style="width:100%;">
         <tr>
             <td style="width:95%;">{{ $item_start }}-{{ $item_end }} ( {{ $task -> task_time }}min )</td>
