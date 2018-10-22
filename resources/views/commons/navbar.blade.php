@@ -41,6 +41,10 @@
                                     <a href="/tasks/future">今後のタスク一覧</a>
                                 </li>
                                 <li role="separator" class="divider"></li>
+                                                                <li>
+                                    <a href="/tasks/all">全タスク一覧</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
                                 <li>
                                     <a href="/users/edit">アカウント管理</a>
                                 </li>

@@ -123,7 +123,7 @@ class TasksController extends Controller
         $today=date('Y-m-d');
   
         //Tasksテーブルのuser_idから自分のタスクを取得
-       $tasks=$user -> tasks() ->where('user_id',$id)->where('start_date','>',$today)->where('status','unfinished')->orderby('start_date')->orderby('zone')->get();
+       $tasks=$user -> tasks() ->where('user_id',$id)->where('start_date','>',$today)->where('status','unfinished')->orderby('start_date')->orderby('title')->get();
 
         
         //$tasksとしてbladeに渡す
@@ -131,6 +131,28 @@ class TasksController extends Controller
         
         
     }
+    
+    /**
+     * 全タスク一覧を出す
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function all()
+    {
+        //ログイン認証で自分のidを取得
+        $id=\Auth::id();
+        $user=User::find($id);
+
+        //Tasksテーブルのuser_idから自分のタスクを取得
+       $tasks=$user -> tasks() ->where('user_id',$id)->where('status','unfinished')->orderby('start_date')->orderby('title')->get();
+
+        
+        //$tasksとしてbladeに渡す
+        return view('tasks/all',['tasks' => $tasks]);
+        
+        
+    }    
     
     /**
      * Display the specified resource.

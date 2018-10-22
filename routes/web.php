@@ -36,6 +36,9 @@ Route::post('tasks/store', 'TasksController@store')->name('tasks.store');
 //今後のタスクの一覧
 Route::get('tasks/future', 'TasksController@future')->name('tasks.future');
 
+//今後のタスクの一覧
+Route::get('tasks/all', 'TasksController@all')->name('tasks.all');
+
 //マイタイムの表示
 
 Route::get('mytime', 'TasksController@mytime_get')->name('tasks.mytime_get');
