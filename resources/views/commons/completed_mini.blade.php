@@ -12,8 +12,8 @@
         //親ウィンドウをリロード これで子ウィンドウも一緒になくなる
         function func1(){
             //parent.location.href=parent.location.href;
-            //$('#mytime',parent.document).submit();
-            $('#mytime_post',parent.document).text('go');
+            $('#data_post2',parent.document).click();
+            //$('#mytime_post',parent.document).text('go');
         }
         function func(){
             $('ul .{{ $list_id }}',parent.document).animate({opacity:0},3000)
@@ -26,7 +26,7 @@
         }
         */
         setTimeout(func1, 1000);
-        setTimeout(func2, 2000);
+        //setTimeout(func2, 2000);
     });
 -->
 </script>             

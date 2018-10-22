@@ -210,7 +210,9 @@ $(function() {
     });
     $('.mytimelist').on('mouseup', function() {
         $(this).css('border','inherit');
-    });
+        $('#mytime_post').text('変更を確定するためには、計算機アイコンをクリックしてください');
+
+    });  
 });
  
 
@@ -261,7 +263,7 @@ function mytime_post(){
     }else{
     }
 }
-setInterval('mytime_post()',1000*10);
+//setInterval('mytime_post()',1000*10);
 
 $(function () {
   $('.lichange-up').click(function() {
