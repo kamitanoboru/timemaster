@@ -58,7 +58,7 @@ $youbi=$week[$date] . '曜日';
 @endif
 
 @if($max_cnt > 0)
-<span id="mytime_post" style="display:none"></span>
+<span id="mytime_post" style="display:block"></span>
 <form action="/mytime" method="post" id="mytime">
     {{ csrf_field() }}
 
@@ -259,7 +259,7 @@ function mytime_post(){
     }else{
     }
 }
-setInterval('mytime_post()',1000*3);
+setInterval('mytime_post()',1000*10);
 
 $(function () {
   $('.lichange-up').click(function() {
