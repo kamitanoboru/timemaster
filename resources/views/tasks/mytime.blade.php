@@ -261,7 +261,7 @@ function mytime_post(){
     }else{
     }
 }
-setInterval('mytime_post()',1000*10);
+//setInterval('mytime_post()',1000*10);
 
 $(function () {
   $('.lichange-up').click(function() {
