@@ -12,7 +12,8 @@
         //親ウィンドウをリロード これで子ウィンドウも一緒になくなる
         function func2(){
             //parent.location.href=parent.location.href;
-            $('#mytime',parent.document).submit();
+            //$('#mytime',parent.document).submit();
+            $('#mytime_post',parent.document).text('go');
         }
         function func1(){
             $('ul .{{ $list_id }}',parent.document).animate({opacity:0},3000)
