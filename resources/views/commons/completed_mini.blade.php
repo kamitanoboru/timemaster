@@ -26,7 +26,7 @@
         }
         */
         setTimeout(func1, 1000);
-        setTimeout(func2, 2000);
+        //setTimeout(func2, 2000);
     });
 -->
 </script>             
