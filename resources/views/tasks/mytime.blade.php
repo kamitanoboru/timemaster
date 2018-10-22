@@ -61,6 +61,9 @@ $youbi=$week[$date] . '曜日';
 <span id="mytime_post" style="display:block"></span>
 <form action="/mytime" method="post" id="mytime">
     {{ csrf_field() }}
+    <input type="hidden" name="damy1" value="damy1">
+    <input type="hidden" name="damy2" value="damy2">
+    
 
 
 
