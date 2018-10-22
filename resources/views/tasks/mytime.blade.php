@@ -257,11 +257,11 @@ setInterval('mytime()',1000*60);
 function mytime_post(){
     if($('#mytime_post').text() == "go"){
         $('#mytime_post').text('');
-        $('#mytime').submit();
+        $('#data_post2').click();
     }else{
     }
 }
-//setInterval('mytime_post()',1000*10);
+setInterval('mytime_post()',1000*10);
 
 $(function () {
   $('.lichange-up').click(function() {
