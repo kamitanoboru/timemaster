@@ -61,8 +61,7 @@ $youbi=$week[$date] . '曜日';
 <span id="mytime_post" style="display:block"></span>
 <form action="/mytime" method="post" id="mytime">
     {{ csrf_field() }}
-    <input type="hidden" name="damy1" value="damy1">
-    <input type="hidden" name="damy2" value="damy2">
+
     
 
 
@@ -258,7 +257,7 @@ setInterval('mytime()',1000*60);
 function mytime_post(){
     if($('#mytime_post').text() == "go"){
         $('#mytime_post').text('');
-        jQuery("form").submit();
+        $('#mytime').submit();
     }else{
     }
 }
