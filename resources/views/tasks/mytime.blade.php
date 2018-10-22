@@ -58,7 +58,7 @@ $youbi=$week[$date] . '曜日';
 @endif
 
 @if($max_cnt > 0)
-
+<span id="mytime_post" style="display:none"></span>
 <form action="/mytime" method="post" id="mytime">
     {{ csrf_field() }}
 
@@ -251,7 +251,15 @@ document.getElementById( "min" ).value = minute;
 mytime();
 setInterval('mytime()',1000*60);
 
-
+//#mytime_postのところに「go」という文字があれば、フォームを自動ポストする
+function mytime_post(){
+    if($('#mytime_post').text() == "go"){
+        $('#mytime_post').text('');
+        jQuery("form").submit();
+    }else{
+    }
+}
+setInterval('mytime_post()',1000*3);
 
 $(function () {
   $('.lichange-up').click(function() {
