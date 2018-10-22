@@ -53,14 +53,15 @@ $youbi=$week[$date] . '曜日';
 <a class="navbar-left" href="/tasks/future"><i class="fas fa-arrow-alt-circle-right fa-2x" style="color:green;margin-right: 1rem;"></i></a>
 <a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
 
-<button id="submit" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
+<button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
 @endif
 
 @if($max_cnt > 0)
 
-<form action="/mytime" method="post">
+<form action="/mytime" method="post" id="mytime">
     {{ csrf_field() }}
+
 
 
     <ul class="sortable buruburu ul-list">
@@ -90,7 +91,7 @@ if($task -> fix_start){
     $fix_start=$hour_fix+$tArry_fix[1];//分だけを足す
 
     //もし$fix_start　>　$sum_start であれば $sum_startを開始時間の方にする
-    if($fix_start > $sum_start){
+    if($fix_start >= $sum_start){
         $sum_start = $fix_start;
     }else{
     //開示時間にすでに間にあってないという場合
@@ -174,7 +175,7 @@ $i=$i+1;
 <button id="submit" class="btn btn-primary center-block" style="text-align:center;">再計算する</button>
 -->
 
-     <button id="submit" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;" alt="再計算する"></i></button>
+     <button id="data_post2" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;" alt="再計算する"></i></button>
 
     </div>
 @else
@@ -214,7 +215,7 @@ $(function() {
 jQuery(function() {
       jQuery(".sortable").sortable();
       jQuery(".sortable").disableSelection();
-      jQuery("#submit,#submit2").click(function() {
+      jQuery("#data_post,#data_post2").click(function() {
           var result = jQuery(".sortable").sortable("toArray");
           jQuery("#result").val(result);
           jQuery("form").submit();
@@ -249,6 +250,7 @@ document.getElementById( "min" ).value = minute;
 //1分毎に表示
 mytime();
 setInterval('mytime()',1000*60);
+
 
 
 $(function () {

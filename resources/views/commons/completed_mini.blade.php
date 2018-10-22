@@ -10,8 +10,12 @@
         
         
         //親ウィンドウをリロード これで子ウィンドウも一緒になくなる
+        function func2(){
+            //parent.location.href=parent.location.href;
+            $('#mytime',parent.document).submit();
+        }
         function func1(){
-            parent.location.href=parent.location.href;
+            $('ul .{{ $list_id }}',parent.document).animate({opacity:0},3000)
         }
         
         //子ウィンドウを閉じる
@@ -20,8 +24,8 @@
             $('#mdOverlay,#mdWindow',parent.document).remove();
         }
         */
-        setTimeout(func1, 3000);
-        //setTimeout(func2, 3000);
+        //setTimeout(func1, 1000);
+        setTimeout(func2, 1000);
     });
 -->
 </script>             

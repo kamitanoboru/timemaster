@@ -327,7 +327,8 @@ exit;
         $message="タスク更新されました";
         $redirect="マイタイムページ";
         $url="/mytime";
-        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        $list_id="list-".$task -> id;
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id'=>$list_id]);
         
             
             
