@@ -14,8 +14,6 @@ $user=\App\User::find($id);
 $max_cnt=count($tasks);
 
 
-
-
 //個人設定の$start_timeを分にする
 $tArry=explode(":",$start_time);
 $hour=$tArry[0]*60;//時間→分
@@ -24,6 +22,7 @@ $sum_end=$hour+$tArry[1];//分だけを足す
 //タスクをli表示する時の表示番号
 $i=1;
 
+//今日の日付
 $today=date("Y-m-d");
 
 //曜日取得
@@ -42,31 +41,33 @@ $date = date('w');
 $youbi=$week[$date] . '曜日';
 @endphp
 
+
+
+
+
+
 <h3 class="mytime-title">Today's Tasks & Schedule({{ $max_cnt }} Items)</h3>
 <h4 class="mytime-title">{{ $today }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
 
-
+<!--印刷表示出ない場合はアイコンを出す-->
 @if($print != "print")
 <div id="icons-mytime">
 <a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
-
 <a class="navbar-left" href="/tasks/future"><i class="fas fa-arrow-alt-circle-right fa-2x" style="color:green;margin-right: 1rem;"></i></a>
 <a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
-
 <button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
 @endif
 
+<!--タスクリストの表示開始-->
 @if($max_cnt > 0)
-<span id="mytime_post" style="display:block"></span>
+<span id="mytime_post" class="alert alert-warning"></span>
 <form action="/mytime" method="post" id="mytime">
     {{ csrf_field() }}
 
-    
-
-
-
     <ul class="sortable buruburu ul-list">
+
+
 
 
 {{--//各タスクごとの表示開始--}}
@@ -155,7 +156,7 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
         {{--PCの場合に読み込むソースを記述--}}
 
-        @include('commons.mytime_item',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
     @endif
 
 @endif
@@ -181,7 +182,7 @@ $i=$i+1;
 
     </div>
 @else
-<!--javascriptのエラー対策 -->
+<!--javascriptのエラー対策　コントローラーで必要なので削除禁止 -->
   <input type="hidden" id="hour" name="hour" style="width:3rem;">
   <input type="hidden" id="min" name="min" style="width:3rem;">
 
@@ -189,6 +190,7 @@ $i=$i+1;
 </form>
 
 @else
+<!--今日のタスクがない場合の分岐-->
 <div style=text-align:center;"">
     <div class="alert alert-success" role="alert">本日以前が開始日となっている未完了のタスクはありません
     <div>
@@ -197,6 +199,7 @@ $i=$i+1;
     </div>
 </div>
 @endif
+<!--タスクリストの表示終了-->
 
 
 <script>
@@ -211,6 +214,7 @@ $(function() {
     $('.mytimelist').on('mouseup', function() {
         $(this).css('border','inherit');
         $('#mytime_post').text('変更を確定するためには、計算機アイコンをクリックしてください');
+        $('#mytime_post').css('display','block');
 
     });  
 });

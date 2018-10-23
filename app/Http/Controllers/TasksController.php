@@ -245,6 +245,117 @@ exit;
     
     }
 
+
+/*
+
+マイタイムトモロー
+*/
+
+
+
+    public function mytime_tm_get($print=null)
+    {
+        //ユーザー認証して、そのユーザーのタスクを取得
+            $id=\Auth::id();
+            $user=User::find($id);
+        //その人のスタート時間も取得
+        $start_time=$user -> start_time;
+
+        //現在時間から10分後
+        $timestamp = strtotime( "+10 minutes" );
+        $now = date("H:i:s",$timestamp);
+
+        //比較して後の方を有効とする
+        if(strtotime($start_time) < strtotime($now)){
+            $start_time = $now;
+        }
+
+        //秒数部分を省く
+        $start_time=substr($start_time, 0, 5);
+
+            //明日の日付
+            $tm=date('Y-m-d', strtotime('+1 day'));    
+
+        //表示用の抽出、ソート
+        //明日のタスクで、未完了のもの、task_order順、zone順
+           $tasks=$user -> tasks() ->whereDate('start_date','=',$tm)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
+
+
+        //これを配列$tasksとしてviewに渡す
+
+
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => $print]);
+
+    }
+
+    public function mytime_tm_post(Request $request)
+    {
+//チェック用
+/*
+echo $request -> result;
+echo $request -> hour;
+exit;
+*/
+        //ユーザー認証して、そのユーザーのタスクを取得
+            $id=\Auth::id();
+            $user=User::find($id);
+
+        //その人のスタート時間も取得してあるもので作成
+            $start_time=$request -> hour.":".$request -> min;
+
+        //順序をテーブルに書き換える
+        $orders=explode(',', $request -> result);
+        //タスクがなくボタンを押されたら例外処理
+        if(count($orders)==0){
+            "WOOPS!";
+            exit;
+        }    
+
+        $new_order=1;
+        foreach($orders as $order){
+            $array=explode("-",$order);
+            $task_id=$array[0];
+
+            //$task_idのタスクをtask_orderの値を$new_orderで書き換えする
+            $request->user()->tasks()->where('id',$task_id)->update([
+                'task_order' => $new_order,
+            ]);
+
+            ++$new_order;
+
+        }
+
+            //明日の日付
+            $tm=date('Y-m-d', strtotime('+1 day'));    
+   
+
+        //表示用の抽出、ソート
+        //本日以前のタスクで、未完了のもの、task_order順、zone順
+           $tasks=$user -> tasks() ->whereDate('start_date','=',$tm)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
+
+
+        //これを配列$tasksとしてviewに渡す
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => null]);
+    
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -285,6 +396,22 @@ exit;
         //編集フォームおよび削除ボタンのあるbladeに渡す
         return view('tasks/edit',['task'=> $task,'hours'=>$hours,'mins'=>$mins ]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -355,6 +482,75 @@ exit;
             
             
     }
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * マイタイムのリストのラベルリンクから開始日だけを簡単にずらす
+     */
+    public function changedate($task_id,$plus)
+    {
+        //バリデーション
+        /*
+        $request = array('task_id'=>$task_id);
+        $request = $request + array('plus'=>$plus);
+        
+       $this->validate($request, [
+            'task_id' => 'required|integer|min:1',
+            'plus' => 'required|integer|min:1',
+            ]);
+        */
+        
+        //ユーザーチェック
+        //ユーザー認証からユーザーidを得る
+        $id=\Auth::id();
+        $task=\App\Task::find($task_id);
+        
+        //一応POSTされた$user_idがそれと同じがチェックする
+        //同じでなければ、ログアウトさせてしまう
+        if($id != $task->user_id){
+            $message="経路エラーのため更新は行われませんでした";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }    
+        
+            
+        //合成する　開始日を決める
+        $start_date=date("Y-m-d", strtotime("+$plus day"));
+        //plus日後\n";
+
+
+        //更新処理 $taskにすでにこのタスクのみが指定されているので
+    
+        $task->update([
+            'start_date' => $start_date,
+        ]);
+        
+
+        //処理完了ページにメッセージとともに飛ばす
+        $message="タスク更新されました";
+        $redirect="マイタイムページ";
+        $url="/mytime";
+        $list_id="list-".$task -> id;
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id'=>$list_id]);
+        
+            
+            
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     /**

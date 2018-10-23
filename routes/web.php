@@ -45,6 +45,16 @@ Route::get('mytime', 'TasksController@mytime_get')->name('tasks.mytime_get');
 
 Route::post('mytime', 'TasksController@mytime_post')->name('tasks.mytime_post');
 
+//マイタイムtomorrowの表示
+
+Route::get('mytime_tm', 'TasksController@mytime_tm_get')->name('tasks.mytime_tm_get');
+
+Route::post('mytime_tm', 'TasksController@mytime_tm_post')->name('tasks.mytime_tm_post');
+
+//開始日をずらすchangedate
+Route::get('changedate/{task_id}/{plus}', 'TasksController@changedate')->name('tasks.changedate')->where(['task_id' => '[0-9]+', 'plus' => '[0-9]+']);;
+
+
 //印刷用ページ
 Route::get('mytime/{print}', 'TasksController@mytime_get')->name('tasks.mytime_get_print');
 

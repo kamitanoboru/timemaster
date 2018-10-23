@@ -34,6 +34,10 @@ $memo=$task -> memo;
 
 @endif
         </div>
+        
+
+        
+        
     <div class="dd"><a href="#"><span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span></a></div>
     <div class="ok"><a href="/tasks/{{ $task -> id }}/destroy" class="modalBtn destroy"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a></div>
     

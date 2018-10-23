@@ -52,6 +52,11 @@ footer {
     background-color: yellow;
 }
 
+ul{
+    padding: 0;
+    margin: 0 5px 10px;
+}
+
 .sortable>li {
     display: block;
     list-style-type: none;
@@ -198,6 +203,7 @@ background-color: cyan;
 
 .form-group>#today,.form-group>#plus1,.form-group>#plus2,.form-group>#plus7,.form-group>#plus30 {
     font-size: 1.5rem;
+    cursor : pointer;
 }
 
 .emp_in_form{
@@ -241,6 +247,46 @@ background-color: cyan;
     width: 50%;
 }
 
+#mytime_post{
+    display: none;
+    text-align:center;
+}
+
+.task_title{
+    font-size: 1.6rem;
+    padding-left: 2rem;
+}
+
+li .label {
+     font-size:120%;   
+}    
+
+li .glyphicon {
+    font-size:200%;
+    vertical-align: bottom;
+}    
+
+.fa-caret-up,.fa-caret-down{
+    font-size:200%;
+}
+
+.table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
+    padding: 3px;
+}
+
+.task_title .glyphicon-repeat{
+    font-size: 160%;
+    color: cornflowerblue;    
+}
+
+.glyphicon-edit{
+    color: brown;    
+}
+
+li .time{
+  border-bottom: solid 3px #87CEFA;
+}
+
 @media(max-width:667px){
     
     .container {
@@ -272,15 +318,16 @@ background-color: cyan;
     
     .glyphicon {
         font-size: 2rem;
-        margin-left: 1.8rem;
+
     }
     
     .date-list{
-        font-size: 1.4rem;
-        padding: 7px;
+
         vertical-align: super;
     }
-    
+    .label {
+         font-size:80%;   
+    }    
     #mdWindow {
         margin-top: -200px;
         margin-left: auto;
