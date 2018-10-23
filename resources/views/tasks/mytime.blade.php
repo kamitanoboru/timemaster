@@ -10,20 +10,6 @@
 $id = Auth::id();
 $user=\App\User::find($id);
 
-//タスクの数
-$max_cnt=count($tasks);
-
-
-//個人設定の$start_timeを分にする
-$tArry=explode(":",$start_time);
-$hour=$tArry[0]*60;//時間→分
-$sum_end=$hour+$tArry[1];//分だけを足す
-
-//タスクをli表示する時の表示番号
-$i=1;
-
-
-
 //対象日付の確定 今日か明日
 if($tm == null){
     $this_day=date("Y-m-d");
@@ -38,7 +24,21 @@ if($tm == null){
     $this_day_str="Tomorrow";
     $to_post="/mytime_tm";
     $nextbefore='<a class="navbar-left" href="/mytime"><i class="fas fa-arrow-alt-circle-left fa-2x" style="color:green;margin-right: 1rem;"></i></a>';
+    $start_time="0:0";
 }
+
+
+//タスクの数
+$max_cnt=count($tasks);
+
+
+//個人設定の$start_timeを分にする
+$tArry=explode(":",$start_time);
+$hour=$tArry[0]*60;//時間→分
+$sum_end=$hour+$tArry[1];//分だけを足す
+
+//タスクをli表示する時の表示番号
+$i=1;
 
 
 
@@ -106,7 +106,7 @@ $sum_start=$sum_end;;
 if($task -> fix_start){
     $fix_start=$task -> fix_start;
 
-    //テスト開始時間があるもので分岐　開始時間をまずは分にする
+    //開始時間があるもので分岐　開始時間をまずは分にする
     $tArry_fix=explode(":",$fix_start);
     $hour_fix=$tArry_fix[0]*60;//時間→分
     $fix_start=$hour_fix+$tArry_fix[1];//分だけを足す
