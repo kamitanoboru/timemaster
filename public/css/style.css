@@ -146,7 +146,7 @@ ul{
 
 .buruburu {
     /*display: inline-block;*/
-    animation: hurueru .3s 5;
+    animation: hurueru .3s 3;
 }
 
 @keyframes hurueru {

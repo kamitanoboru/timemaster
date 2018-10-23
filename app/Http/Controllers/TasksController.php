@@ -537,7 +537,7 @@ exit;
         $redirect="マイタイムページ";
         $url="/mytime";
         $list_id="list-".$task -> id;
-        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id'=>$list_id]);
+        return view('commons/completed_mini_nopost',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id'=>$list_id]);
         
             
             
