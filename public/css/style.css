@@ -172,13 +172,17 @@ ul{
     list-style-type: none;
     border: solid 1px cadetblue;
     background-color: white;
-    padding: 0.8rem 0.8rem 0.8rem 2rem;
-}   
+    padding: 0 0.8rem 0 2rem;
+}
+
+.future-list .glyphicon{
+    font-size:150%;
+}
 
 .each_date{
     display: block;
     list-style-type: none;
-background-color: greenyellow;
+background-color: aquamarine;
     padding: 0.8rem;
     font-size: 2rem; 
 }
@@ -261,6 +265,10 @@ li .label {
      font-size:120%;   
 }    
 
+.label-info{
+    background-color:darkslategray;
+}
+
 li .glyphicon {
     font-size:200%;
     vertical-align: bottom;
@@ -283,8 +291,15 @@ li .glyphicon {
     color: brown;    
 }
 
+
+
 li .time{
-  border-bottom: solid 3px #87CEFA;
+    border-bottom: solid 2px gray;
+    padding-bottom: 2px;
+}
+
+.future-list{
+    font-size: 1.6rem;
 }
 
 @media(max-width:667px){
@@ -292,7 +307,7 @@ li .time{
     .container {
     background-color: white;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     }
     
     .navbar{

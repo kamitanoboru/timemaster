@@ -22,8 +22,25 @@ $sum_end=$hour+$tArry[1];//分だけを足す
 //タスクをli表示する時の表示番号
 $i=1;
 
-//今日の日付
-$today=date("Y-m-d");
+
+
+//対象日付の確定 今日か明日
+if($tm == null){
+    $this_day=date("Y-m-d");
+    $date = date('w');
+    $this_day_str="Today";
+    $to_post="/mytime";
+    $nextbefore='<a class="navbar-left" href="/mytime_tm"><i class="fas fa-arrow-alt-circle-right fa-2x" style="color:green;margin-right: 1rem;"></i></a>';
+
+}else{
+    $this_day=$tm;
+    $date=date('w', strtotime('+1 day'));  
+    $this_day_str="Tomorrow";
+    $to_post="/mytime_tm";
+    $nextbefore='<a class="navbar-left" href="/mytime"><i class="fas fa-arrow-alt-circle-left fa-2x" style="color:green;margin-right: 1rem;"></i></a>';
+}
+
+
 
 //曜日取得
 //配列を使用し、要素順に(日:0〜土:6)を設定する
@@ -37,7 +54,7 @@ $week = [
   '土', //6
 ];
  
-$date = date('w');
+
 $youbi=$week[$date] . '曜日';
 @endphp
 
@@ -46,14 +63,14 @@ $youbi=$week[$date] . '曜日';
 
 
 
-<h3 class="mytime-title">Today's Tasks & Schedule({{ $max_cnt }} Items)</h3>
-<h4 class="mytime-title">{{ $today }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
+<h3 class="mytime-title">{{ $this_day_str }}'s Tasks & Schedule({{ $max_cnt }} Items)</h3>
+<h4 class="mytime-title">{{ $this_day }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
 
 <!--印刷表示出ない場合はアイコンを出す-->
 @if($print != "print")
 <div id="icons-mytime">
 <a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
-<a class="navbar-left" href="/tasks/future"><i class="fas fa-arrow-alt-circle-right fa-2x" style="color:green;margin-right: 1rem;"></i></a>
+{!! $nextbefore !!}
 <a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
 <button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
@@ -62,7 +79,7 @@ $youbi=$week[$date] . '曜日';
 <!--タスクリストの表示開始-->
 @if($max_cnt > 0)
 <span id="mytime_post" class="alert alert-warning"></span>
-<form action="/mytime" method="post" id="mytime">
+<form action="{{ $to_post }}" method="post" id="mytime">
     {{ csrf_field() }}
 
     <ul class="sortable buruburu ul-list">
@@ -78,6 +95,7 @@ $youbi=$week[$date] . '曜日';
 //開始時間の初期化と反映のフラグ
 $fix_start=null;
 $fix_flag="off";
+$free_time=0;
 
 
 //各タスクの開始時間を計算(最初は個人設定の$start_timeの分換算が入る)
@@ -92,6 +110,10 @@ if($task -> fix_start){
     $tArry_fix=explode(":",$fix_start);
     $hour_fix=$tArry_fix[0]*60;//時間→分
     $fix_start=$hour_fix+$tArry_fix[1];//分だけを足す
+
+    //空き時間の確認
+    $free_time=$fix_start - $sum_start;
+
 
     //もし$fix_start　>　$sum_start であれば $sum_startを開始時間の方にする
     if($fix_start >= $sum_start){
@@ -129,6 +151,12 @@ if(strtotime($task -> created_at) > strtotime($before)){
 }
 
 @endphp
+
+@if($free_time > 0)
+{{--空き時間の表示--}}
+@include('commons.mytime_item_free',['free_time' => $free_time])
+
+@endif
 
 @if($print == "print")
 {{--印刷用データの表示--}}
@@ -204,6 +232,19 @@ $i=$i+1;
 
 <script>
 <!--
+
+//対象日付の確定 今日か明日で背景色を変える
+@if($tm == null)
+$(function() {
+    //$('body').css('background-color','yellow');
+})
+
+@else
+$(function() {
+    $('body').css('background-color','#C2F4F1');
+})
+
+@endif
 
 
 $(function() {

@@ -3,10 +3,19 @@
 @section('content')
 
 <!-- ここにページ毎のコンテンツを書く -->
+
+
+
 @php
+//このページのURLを取得　小窓から下の見えないボタンを押させてリロードさせている
+$this_url=(empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+
 $user = Auth::user();
 $start_date=null;
 @endphp
+
+
+<input type="button" id="data_post2" onclick="location.href='{{ $this_url }}';"value="リンク文字" style="display:none;">
 
 @if(count($tasks) > 0)
 
@@ -30,7 +39,7 @@ $start_date=null;
 
 
 <ul class="ul-list">
-    <li class="repeat_lists">繰り返しタスク一覧<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></li>
+    <li class="repeat_lists">繰り返しタスク一覧</li>
     @foreach($tasks as $task)
         @if($task -> type == "repeat")
             @include('commons.future_item_repeat')

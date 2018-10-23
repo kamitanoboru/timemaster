@@ -30,7 +30,7 @@ $start_date=null;
 
 
 <ul class="ul-list">
-    <li class="repeat_lists">繰り返しタスク一覧<span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></li>
+    <li class="repeat_lists">繰り返しタスク一覧</li>
     @foreach($tasks as $task)
         @if($task -> type == "repeat")
             @include('commons.future_item_repeat')

@@ -192,7 +192,7 @@ class TasksController extends Controller
         //これを配列$tasksとしてviewに渡す
 
 
-        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => $print]);
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => $print,'tm' => null]);
 
     }
 
@@ -241,7 +241,7 @@ exit;
 
 
         //これを配列$tasksとしてviewに渡す
-        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => null]);
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => null,'tm' => null]);
     
     }
 
@@ -284,7 +284,7 @@ exit;
         //これを配列$tasksとしてviewに渡す
 
 
-        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => $print]);
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => $print,'tm' => $tm]);
 
     }
 
@@ -335,7 +335,7 @@ exit;
 
 
         //これを配列$tasksとしてviewに渡す
-        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => null]);
+        return view('tasks/mytime',['tasks' => $tasks,'start_time' => $start_time,'print' => null,'tm' => $tm]);
     
     }
 
