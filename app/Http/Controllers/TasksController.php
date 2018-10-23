@@ -224,10 +224,13 @@ exit;
             $array=explode("-",$order);
             $task_id=$array[0];
 
-            //$task_idのタスクをtask_orderの値を$new_orderで書き換えする
-            $request->user()->tasks()->where('id',$task_id)->update([
-                'task_order' => $new_order,
-            ]);
+            if($task_id > 0){
+                //空き時間をliにした時に、$task_idがないため
+                //$task_idのタスクをtask_orderの値を$new_orderで書き換えする
+                $request->user()->tasks()->where('id',$task_id)->update([
+                    'task_order' => $new_order,
+                ]);
+            }
 
             ++$new_order;
 
