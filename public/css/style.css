@@ -316,6 +316,10 @@ li .time{
     padding: 0 15px;
     }
     
+    .dropdown, .dropup {
+        float: right;
+    }    
+    
     .mytime-title{
     font-size: 1.5rem;
     }

@@ -63,6 +63,12 @@ Route::get('tasks/{id}/edit', 'TasksController@edit')->name('tasks.edit');
 //タスクの編集
 Route::post('tasks/update', 'TasksController@update')->name('tasks.update');
 
+//タスクのメモの表示
+Route::get('tasks/{id}/memo_view', 'TasksController@memo_view')->name('tasks.memo_view');
+
+//タスクのメモの編集
+Route::post('tasks/update_memo', 'TasksController@update_memo')->name('tasks.update_memo');
+
 //タスクの削除
 Route::get('tasks/{id}/destroy', 'TasksController@destroy_before')->name('tasks.destroy_before');
 Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');

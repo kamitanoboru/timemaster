@@ -357,10 +357,9 @@ $(function () {
 
 $(function(){
     
-    // 「id="jQueryPush"」がクリックされた場合
-    $(".open_icons").click(function(){
-        // 「id="jQueryBox"」の表示、非表示を切り替える
-        $(this).next('.icons').toggle();
+   $(".open_toggle").click(function(){
+        
+        $(this).next('.contents_toggle').toggle();
         if($(this).text() == "close"){
         $(this).text("edit");
             

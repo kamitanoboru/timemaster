@@ -350,6 +350,93 @@ exit;
 
 
 
+    /**
+     * タスクのメモの内容を表示する
+     *
+     * @param  int  $id
+     * 
+     */
+    public function memo_view($id)
+    {
+        
+        //そのidからtaskデータを取得
+        $task=Task::find($id);
+        
+        if($task == null){
+            echo "そのタスクはすでに削除されています";
+            exit;
+        }
+        
+        //ユーザーチェック
+        //ユーザー認証からユーザーidを得る
+        $id=\Auth::id();
+        
+        //一応POSTされた$user_idがそれと同じがチェックする
+        //同じでなければ、ログアウトさせてしまう
+        if($id != $task->user_id){
+            $message="経路エラーのため更新は行われませんでした";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }        
+    
+
+
+        //るbladeに渡す
+        return view('tasks/memo_view',['task'=> $task]);
+    }
+
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update_memo(Request $request)
+    {
+
+        //ユーザーチェック
+        //ユーザー認証からユーザーidを得る
+        $id=\Auth::id();
+        $task=\App\Task::find($request -> task_id);
+        
+        //一応POSTされた$user_idがそれと同じがチェックする
+        //同じでなければ、ログアウトさせてしまう
+        if($id != $task->user_id){
+            $message="経路エラーのため更新は行われませんでした";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }    
+        
+
+        //バリデーション
+        $memo = htmlspecialchars($request -> memo);        
+
+        //更新処理
+    
+        $request->user()->tasks()->where('id',$request -> task_id)->update([
+            'memo' => $memo,
+        ]);
+        
+
+        //処理完了ページにメッセージとともに飛ばす
+        $message="メモ更新されました";
+        $redirect="マイタイムページ";
+        $url="/mytime";
+        $list_id="list-".$task -> id;
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id'=>$list_id]);
+        
+            
+            
+    }
+    
+    
+
+
 
 
 
@@ -432,7 +519,7 @@ exit;
             'title' => 'required|max:191',
             'type' => 'required|string',
             'start_date' => 'required|date|after_or_equal:today',
-            'fix_start' => 'date_format:H:i:s',
+            'fix_start' => 'date_format:H:i',
             'task_time_hours' => 'required|digits_between:1,100',
             'task_time_mins' => 'required|digits_between:0,360',
             'zone' => 'required|digits_between:1,7',
