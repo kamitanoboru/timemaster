@@ -184,7 +184,7 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
         {{--PCの場合に読み込むソースを記述--}}
 
-        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_pc',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
     @endif
 
 @endif
@@ -355,6 +355,21 @@ $(function () {
   });
 });
 
+$(function(){
+    
+    // 「id="jQueryPush"」がクリックされた場合
+    $(".open_icons").click(function(){
+        // 「id="jQueryBox"」の表示、非表示を切り替える
+        $(this).next('.icons').toggle();
+        if($(this).text() == "close"){
+        $(this).text("edit");
+            
+        }else{
+        $(this).text("close");
+            
+        }
+    });
+});
 
 
 // -->

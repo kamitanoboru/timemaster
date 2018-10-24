@@ -62,7 +62,7 @@ ul{
     list-style-type: none;
     border: solid 1px cadetblue;
     background-color: white;
-    padding: 0.8rem;
+    padding: 3px 0.8rem;
 }
 
 .item{
@@ -262,7 +262,7 @@ background-color: cyan;
 }
 
 li .label {
-     font-size:120%;   
+     font-size:90%;   
 }    
 
 .label-info{
@@ -271,7 +271,7 @@ li .label {
 }
 
 li .glyphicon {
-    font-size:200%;
+    font-size:140%;
     vertical-align: bottom;
 }    
 
@@ -280,11 +280,11 @@ li .glyphicon {
 }
 
 .table-condensed>tbody>tr>td, .table-condensed>tbody>tr>th, .table-condensed>tfoot>tr>td, .table-condensed>tfoot>tr>th, .table-condensed>thead>tr>td, .table-condensed>thead>tr>th {
-    padding: 3px;
+    padding: 4px 3px;
 }
 
 .task_title .glyphicon-repeat{
-    font-size: 160%;
+
     color: cornflowerblue;    
 }
 
