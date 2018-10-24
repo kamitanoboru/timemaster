@@ -44,7 +44,7 @@
                 @endif
                 
                 <a href="#" class="open_icons" style="float: right;">edit</a>                
-                <div class="icons" style="display:none;float: right;>
+                <div class="icons" style="display:none;float: right;">
                 
                 <!--編集アイコン-->
                 <a href="/tasks/{{ $task -> id }}/edit" class="modalBtn"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

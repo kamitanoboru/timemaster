@@ -56,7 +56,7 @@ $tomorrow=date('Y-m-d', strtotime('+1 day'));
         {!! Form::label('fix_start', 'タスクの開始指定時間(未記入OK)') !!}
 
         <div class="input-group clockpicker">
-        <input type="text" name="fix_start" class="form-control" value="">
+        <input type="text" name="fix_start" class="form-control" value="{{ $task->fix_start }}">
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-time"></span>
         </span>
