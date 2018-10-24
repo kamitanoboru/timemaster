@@ -29,6 +29,10 @@ Route::group(['middleware' => ['auth']], function () {
     //タスクの明日以降の未完了の表示
     //Route::resource('tasks', 'TasksController', ['only' => ['index','show', 'create', 'store' ,'update','edit','destroy','future','memoshow','memoedit','print']]);
 
+//サービスの説明、使い方
+Route::view('/intro', 'intro');
+
+
 //タスクの新規追加
 Route::get('tasks/create', 'TasksController@create')->name('tasks.create');
 Route::post('tasks/store', 'TasksController@store')->name('tasks.store');

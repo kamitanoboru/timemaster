@@ -22,7 +22,7 @@ $user = Auth::user();
         
         {!! Form::hidden('task_id',$task -> id,['class'=>'form-control']) !!}        
 
-        {!! Form::submit('タスクを完了する', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit('このタスクを完了する', ['class' => 'btn btn-primary']) !!}
     
             <div class="form-group"　name="destroy">
 
@@ -57,12 +57,12 @@ $user = Auth::user();
    
                 <div class="alert alert-info" role="alert">本日は{{ $today_date }}です</div>
 
+      
+        {!! Form::submit('このタスクを完了する', ['class' => 'btn btn-primary']) !!}
+
             @endif     
             
             </div>
-      
-        {!! Form::submit('タスクを完了する', ['class' => 'btn btn-primary']) !!}
-
         
     </div>
         {!! Form::close() !!}

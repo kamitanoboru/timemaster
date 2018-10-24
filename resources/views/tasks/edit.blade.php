@@ -31,6 +31,7 @@ $today_date=date('Y-m-d');
 $tomorrow=date('Y-m-d', strtotime('+1 day'));
 
 //fix_startに入っているデータがあれば、秒をとる加工
+$fix_start=null;
 if($task -> fix_start){
     $fArry=explode(":",$task -> fix_start);
     $fix_start=$fArry[0].":".$fArry[1];

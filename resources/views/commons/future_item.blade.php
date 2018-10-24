@@ -20,9 +20,9 @@
                     <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>
                 @endif
                 
+                <!--メモありタスクマーク-->
                 @if(strlen($task -> memo) > 0)
-                    <a data-target="modal{{ $task -> id }}" class="modal-open"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
-                    <span id="modal{{ $task -> id }}" class="modal-content">{{ $task -> memo }}</span>
+                <a href="/tasks/{{ $task -> id }}/memo_view" class="modalBtn"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
                 @endif
 
                 <a href="/tasks/{{ $task -> id }}/edit" class="modalBtn"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>

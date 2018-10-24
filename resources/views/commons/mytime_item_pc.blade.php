@@ -36,17 +36,7 @@
                 
                 <!--メモありタスクマーク-->
                 @if(strlen($task -> memo) > 0)
-                    @php
-                        $memo=$task -> memo;
-                    @endphp
-
                 <a href="/tasks/{{ $task -> id }}/memo_view" class="modalBtn"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
-
-  
-<!--  
-                <a data-target="modal{{ $task -> id }}" class="modal-open"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
-                <div id="modal{{ $task -> id }}" class="modal-content">{!! nl2br(e($memo)) !!}</div>
--->
                 @endif
                 
                 <a href="#" class="open_toggle" style="float: right;">edit</a>                

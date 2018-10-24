@@ -519,7 +519,7 @@ exit;
             'title' => 'required|max:191',
             'type' => 'required|string',
             'start_date' => 'required|date|after_or_equal:today',
-            'fix_start' => 'date_format:H:i',
+            'fix_start' => 'nullable|date_format:H:i',
             'task_time_hours' => 'required|digits_between:1,100',
             'task_time_mins' => 'required|digits_between:0,360',
             'zone' => 'required|digits_between:1,7',

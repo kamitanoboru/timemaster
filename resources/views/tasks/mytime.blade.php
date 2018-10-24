@@ -78,7 +78,7 @@ $youbi=$week[$date] . '曜日';
 
 <!--タスクリストの表示開始-->
 @if($max_cnt > 0)
-<span id="mytime_post" class="alert alert-warning"></span>
+<span id="mytime_post" class="alert alert-warning">タスクを優先順位に並べてください</span>
 <form action="{{ $to_post }}" method="post" id="mytime">
     {{ csrf_field() }}
 
@@ -254,8 +254,8 @@ $(function() {
     });
     $('.mytimelist').on('mouseup', function() {
         $(this).css('border','inherit');
-        $('#mytime_post').text('変更を確定するためには、計算機アイコンをクリックしてください');
-        $('#mytime_post').css('display','block');
+        $('#mytime_post').text('計算機アイコンをクリックすると保存されます');
+        $('#mytime_post').css('background-color','cornsilk');
 
     });  
 });

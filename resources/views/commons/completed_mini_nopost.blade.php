@@ -13,7 +13,7 @@
         function func1(){
             //parent.location.href=parent.location.href;
             //$('#data_post2',parent.document).click();
-            $('#mytime_post',parent.document).text('一連の変更処理が終わったら、すぐに計算機のアイコンを押してください');
+            $('#mytime_post',parent.document).text('一連の変更処理後、計算機のアイコンを押してください');
         }
         function func2(){
             $('ul .{{ $list_id }}',parent.document).animate({opacity:0},3000)

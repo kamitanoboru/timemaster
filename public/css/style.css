@@ -252,8 +252,13 @@ background-color: cyan;
 }
 
 #mytime_post{
-    display: none;
+    display: block;
+    margin: 0 5px;
+    padding: 2px 0;    
     text-align:center;
+    color: #8a6d3b;
+    background-color:  inherit;
+    border-color: cadetblue;
 }
 
 .task_title{
