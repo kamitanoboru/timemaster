@@ -20,8 +20,20 @@ $start_date=null;
         @else
             @php
             $start_date = $task -> start_date;
+            //曜日取得
+            //配列を使用し、要素順に(日:0〜土:6)を設定する
+            $week = [
+              '日', //0
+              '月', //1
+              '火', //2
+              '水', //3
+              '木', //4
+              '金', //5
+              '土', //6
+            ];
+            $youbi=$week[date("w",strtotime($start_date))] . '曜日';
             @endphp
-            <li class="each_date">{{ $start_date }}</li>
+            <li class="each_date">{{ $start_date }}({{ $youbi }})</li>
         @endif
         
 @include('commons.future_item')
