@@ -78,7 +78,11 @@ $youbi=$week[$date] . '曜日';
 
 <!--タスクリストの表示開始-->
 @if($max_cnt > 0)
-<span id="mytime_post" class="alert alert-warning">タスクを優先順位に並べてください</span>
+
+    @if($print != "print")
+    <span id="mytime_post" class="alert alert-warning">タスクを優先順位に並べてください</span>
+    @endif
+
 <form action="{{ $to_post }}" method="post" id="mytime">
     {{ csrf_field() }}
 

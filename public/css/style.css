@@ -308,6 +308,66 @@ li .time{
     font-size: 1.6rem;
 }
 
+/*説明ページ用開始*/
+.intro h1{
+    font-size: 2.4rem;
+}
+.intro h2{ 
+    margin-top: 6rem;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    font-size: 2rem;
+    padding: 1rem;
+    margin-top: 6rem;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    font-size: 2rem;
+    padding: 1rem;
+}   
+.intro h3{
+    font-size: 1.7rem;
+    border: solid 1px lightgray;
+    padding: 1rem;
+    background-color: aquamarine;
+    font-weight: bold;
+    display: inline-block;    
+}       
+.intro h4{
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: mediumblue;
+}    
+
+.intro p{
+    line-height: 3rem;
+}
+.intro li{
+    line-height: 2.6rem;
+    margin-bottom: 2rem;
+}
+.intro li>.title{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+    
+.intro .list-group-item {
+    background-color: azure;
+    font-size: 1.6rem;
+}
+
+.intro img{
+    width: 90%;
+    margin-bottom: 4rem;
+    border: solid 1px;
+    background-color: white;
+    padding: 2rem;    
+}
+/*説明ページ用完了*/
+
+.b-yellow{
+    background-color:yellow;
+}
+
 @media(max-width:667px){
     
     .container {

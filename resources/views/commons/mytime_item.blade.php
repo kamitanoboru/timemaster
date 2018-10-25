@@ -14,7 +14,10 @@
       <i class="fas fa-skull-crossbones fa-2x"></i>
 @endif
 @if($task -> fix_start)
-[{{ $task -> fix_start }}]
+    @php
+    $fix_start_view=substr($task -> fix_start, 0, 5)
+    @endphp
+[{{ $fix_start_view }}]
 @endif
 
 @if($before_flag == "newlist")

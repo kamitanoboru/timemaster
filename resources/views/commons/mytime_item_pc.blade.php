@@ -10,7 +10,10 @@
                   <i class="fas fa-skull-crossbones"></i>
                 @endif
                 @if($task -> fix_start)
-                    [{{ $task -> fix_start }}]
+                    @php
+                    $fix_start_view=substr($task -> fix_start, 0, 5)
+                    @endphp
+                    [{{ $fix_start_view }}]
                 @endif
                 
                 <!--開始日時が今日より前に日付を表示-->
