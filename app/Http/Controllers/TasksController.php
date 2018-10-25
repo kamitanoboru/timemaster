@@ -209,7 +209,13 @@ exit;
             $user=User::find($id);
 
         //その人のスタート時間も取得してあるもので作成
-            $start_time=$request -> hour.":".$request -> min;
+        //分数が0-9の場合には頭に0をつける加工
+        if($request -> min < 10){
+            $min = "0".$request ->min;
+        }else{
+            $min=$request -> min;
+        }
+            $start_time=$request -> hour.":".$min;
 
         //順序をテーブルに書き換える
         $orders=explode(',', $request -> result);
@@ -261,17 +267,10 @@ exit;
         //ユーザー認証して、そのユーザーのタスクを取得
             $id=\Auth::id();
             $user=User::find($id);
-        //その人のスタート時間も取得
+        //その人のスタート時間も取得 明日についてだけから余計な比較はいらない
         $start_time=$user -> start_time;
 
-        //現在時間から10分後
-        $timestamp = strtotime( "+10 minutes" );
-        $now = date("H:i:s",$timestamp);
 
-        //比較して後の方を有効とする
-        if(strtotime($start_time) < strtotime($now)){
-            $start_time = $now;
-        }
 
         //秒数部分を省く
         $start_time=substr($start_time, 0, 5);
@@ -303,8 +302,8 @@ exit;
             $id=\Auth::id();
             $user=User::find($id);
 
-        //その人のスタート時間も取得してあるもので作成
-            $start_time=$request -> hour.":".$request -> min;
+        //その人のスタート時間も取得 明日についてだけから余計な比較はいらない
+        $start_time=$user -> start_time;
 
         //順序をテーブルに書き換える
         $orders=explode(',', $request -> result);

@@ -24,7 +24,6 @@ if($tm == null){
     $this_day_str="Tomorrow";
     $to_post="/mytime_tm";
     $nextbefore='<a class="navbar-left" href="/mytime"><i class="fas fa-arrow-alt-circle-left fa-2x" style="color:green;margin-right: 1rem;"></i></a>';
-    $start_time="0:0";
 }
 
 
