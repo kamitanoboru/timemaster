@@ -44,7 +44,7 @@ footer {
     letter-spacing: 0.15em;
 }
 .cover .btn-success {
-    background-color: #ed486f;
+    background-color: rgba(100,100,255,0.5);
     border-color: #ed486f;
 }
 
