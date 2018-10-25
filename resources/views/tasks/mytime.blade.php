@@ -70,7 +70,10 @@ $youbi=$week[$date] . '曜日';
 <div id="icons-mytime">
 <a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
 {!! $nextbefore !!}
-<a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
+    <!--明日のリストの場合は印刷は出さない-->
+    @if($tm == null)
+    <a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
+    @endif
 <button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
 @endif
@@ -163,7 +166,7 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
 @if($print == "print")
 {{--印刷用データの表示--}}
-@include('commons.mytime_item_print',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+@include('commons.mytime_item_print',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag,'tm' => $tm])
 
 @else
 
@@ -176,18 +179,18 @@ if(strtotime($task -> created_at) > strtotime($before)){
 
 
         {{--スマホの場合に読み込むソースを記述--}}
-        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag,'tm' => $tm])
 
     @elseif ((strpos($ua, 'Android') !== false) || (strpos($ua, 'iPad') !== false))
 
         {{--タブレットの場合に読み込むソースを記述--}}
-        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_mobile',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag,'tm' => $tm])
         
     @else
 
         {{--PCの場合に読み込むソースを記述--}}
 
-        @include('commons.mytime_item_pc',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag])
+        @include('commons.mytime_item_pc',['item_start'=>$item_start,'item_end' =>$item_end,'list_i' => $i,'fix_flag' => $fix_flag,'tm' => $tm])
     @endif
 
 @endif
