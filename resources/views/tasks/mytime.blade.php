@@ -60,7 +60,9 @@ $youbi=$week[$date] . '曜日';
 
 
 
-
+@if($print == "print")
+<div class="print_link"><a href="#" onclick="window.print(); return false;">PRINT</a></div>
+@endif
 
 <h3 class="mytime-title">{{ $this_day_str }}'s Tasks & Schedule({{ $max_cnt }} Items)</h3>
 <h4 class="mytime-title">{{ $this_day }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>

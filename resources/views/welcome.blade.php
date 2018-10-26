@@ -8,7 +8,7 @@
                 @if (Auth::check())
                     <a href="mytime" class="btn btn-success btn-lg">マイタイムに行く</a>
                 @else
-                <a href="/signup" class="btn btn-success btn-lg">時間の効率化を手にしますか?</a>
+                <a href="/intro" class="btn btn-success btn-lg">時間の効率化を手にしますか?</a>
                 @endif
             </div>
         </div>

@@ -2,8 +2,13 @@
 
 
 @section('content')
-<div class="intro">    
-<h1>TIME MASTER Concept & How to User & Help</h1>
+<div class="intro">
+@if(Auth::check() == false)
+<div id="signup">
+利用するには<a href="/signup" style="background-color:yellow;">新規登録</a>が必要です    
+</div>
+@endif
+<h1>TIME MASTER Concept & How to Use & Help</h1>
 <h2>Concept</h2>
     <h3>「TIMEMASTER」はタスクから一日のスケジュールを作るサービスです</h3>
     <ul class="list-group">
@@ -102,7 +107,7 @@
     </li>
     <li class="list-group-item"><div class="title">繰り返しタスクの周期は登録できますか</div>
         <div>
-            「繰り返しタスク」であることは設定できますが、周期は登録できません。タスクを削除する時に、次回の開始日を投句するようにしてください。
+            「繰り返しタスク」であることは設定できますが、周期は登録できません。タスクを削除する時に、次回の開始日を指定するようにしてください。
         </div>
     </li>
     <li class="list-group-item"><div class="title">休憩や食事タイムや予備時間は設定できますか</div>

@@ -57,8 +57,8 @@
                   <a href="/changedate/{{ $task -> id }}/2" class="modalBtn"><span class="label label-info" id="plus1">＋1</span></a>
                   <a href="/changedate/{{ $task -> id }}/3" class="modalBtn"><span class="label label-info" id="plus2">＋2</span></a>
                   <a href="/changedate/{{ $task -> id }}/8" class="modalBtn"><span class="label label-info" id="plus7">＋7</span></a>
-                
                 @endif
+                
                 <!--削除アイコン-->
                 <a href="/tasks/{{ $task -> id }}/destroy" class="modalBtn destroy"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
                 

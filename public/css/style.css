@@ -362,11 +362,27 @@ li .time{
     background-color: white;
     padding: 2rem;    
 }
+
+.intro #signup{
+    position: fixed;
+    bottom: 10px;
+    left: 20px;
+    z-index: 2;
+    padding: 0.5rem;
+    background-color: antiquewhite;
+    border: solid 1px lightblue;
+}
 /*説明ページ用完了*/
 
 .b-yellow{
     background-color:yellow;
 }
+
+.print_link{
+    float: right;
+}
+
+
 
 @media(max-width:667px){
     

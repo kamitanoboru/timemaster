@@ -22,6 +22,9 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+//サービスの説明、使い方
+Route::view('/intro', 'intro');
+
 //　ログイン認証付きのルーティング
 Route::group(['middleware' => ['auth']], function () {
 
@@ -29,8 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     //タスクの明日以降の未完了の表示
     //Route::resource('tasks', 'TasksController', ['only' => ['index','show', 'create', 'store' ,'update','edit','destroy','future','memoshow','memoedit','print']]);
 
-//サービスの説明、使い方
-Route::view('/intro', 'intro');
+
 
 
 //タスクの新規追加
