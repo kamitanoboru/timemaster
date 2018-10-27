@@ -17,6 +17,12 @@ footer {
     height: 40px;
 }
 
+.navbar-icons {
+    margin-left: 10px;
+    position: relative;
+    top: 10px;
+}
+
 /* cover */
 .cover {
     margin-top: -20px;
@@ -395,6 +401,18 @@ li .time{
     .navbar{
     margin: 0;
     padding: 0 15px;
+    }
+    
+    h1{
+        font-size: 20px;
+    }
+    
+    .form-little {
+    display: block;
+    width: 80%;
+    border: solid 0.5px lightgray;
+    margin: 1rem auto;
+    padding: 5px;
     }
     
     .dropdown, .dropup {

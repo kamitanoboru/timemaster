@@ -2,6 +2,25 @@
 
 @section('content')
 
+  <script type="text/javascript" src="{{ secure_asset('js/tinymce/tinymce.min.js') }}"></script>
+
+<script>
+  tinymce.init({
+     selector: "#mymemo",
+     language: "ja", // 言語 = 日本語
+        height: 300,      // 高さ = 300px
+        menubar: false,   // メニューバーを隠す
+        plugins: "textcolor image link", // 文字色、画像ボタン、リンク用のプラグインを適用
+        toolbar: [ // ツールバー(2段)
+            // 戻る 進む | フォーマット | 太字 斜体 | 左寄せ 中央寄せ 右寄せ 均等割付 | 箇条書き 段落番号 インデントを減らす インデント
+            "undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+            // 文字サイズ 文字色 画像 リンク
+            "fontsizeselect forecolor image link"
+        ],
+        statusbar: false, // ステータスバーを隠す
+    
+  });
+  </script>
 <!-- ここにページ毎のコンテンツを書く -->
 @php
 
@@ -61,6 +80,16 @@ $('.clockpicker').clockpicker();
         {!! Form::label('password_confirmation', 'パスワード（確認）') !!}
         {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
         </div>
+        
+        <div class="form-group">
+        {!! Form::label('name', 'グーグルカレンダーiframeタグ:') !!}
+        {!! Form::textarea('gc',$user -> gc,['class'=>'form-control']) !!}
+        </div>
+        
+        <div class="form-group">
+        {!! Form::label('name', 'マイメモ:') !!}
+        {!! Form::textarea('mymemo',$user -> mymemo,['class'=>'form-control','id' => 'mymemo']) !!}
+        </div>        
                     
         {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
 

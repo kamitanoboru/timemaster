@@ -35,6 +35,19 @@ class UsersController extends Controller
             'start_time' => 'required|max:8',
         ]);
         
+
+        //$gcが本当にグーグルカレンダーのタグかチェック
+        if(!preg_match('/^<iframe src="https:\/\/calendar.google.com\/calendar\/embed?.+<\/iframe>$/',$request -> gc)){
+            $message="googleカレンダーのタグではないようです　文頭、文末に余計な空白や文字が入ってないか確認してください";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+            return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }
+        
+        //バリデーション
+        $gc = htmlspecialchars($request -> gc);   
+        $mymemo = htmlspecialchars($request -> mymemo);           
+        
         //同じ場合、そのidのユーザー情報をPOSTされたデータで更新する
         //パスワードがnullかどうかで分岐
         //パスワードがnullの場合
@@ -43,6 +56,8 @@ class UsersController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'start_time' => $request->start_time,
+                'gc' => $gc,
+                'mymemo' => $mymemo,
             ]);
         
         //パスワードがnullでない場合
@@ -57,13 +72,15 @@ class UsersController extends Controller
             
             //start_timeの秒数は削除する
             $start_time = $request->start_time;
-$start_time=date('H:i',strtotime($start_time));
+            $start_time=date('H:i',strtotime($start_time));
             
             $request->user()->where('id', $id)->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => bcrypt($request->password),
                 'start_time' => $start_time,
+                'gc' => $gc,
+                'mymemo' => $mymemo,
             ]);    
             
         }
@@ -107,4 +124,21 @@ $start_time=date('H:i',strtotime($start_time));
         $url="/";
         return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
     }    
+    
+    /*グーグルカレンダーの表示*/
+    
+            public function gc()
+    {
+        //編集フォームおよび削除ボタンのあるbladeに渡す
+        return view('users/gc');
+    }
+    
+        /*マイメモの表示*/
+    
+            public function mymemo()
+    {
+        //編集フォームおよび削除ボタンのあるbladeに渡す
+        return view('users/mymemo');
+    }
+    
 }

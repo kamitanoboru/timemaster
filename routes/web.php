@@ -79,6 +79,13 @@ Route::post('tasks/update_memo', 'TasksController@update_memo')->name('tasks.upd
 Route::get('tasks/{id}/destroy', 'TasksController@destroy_before')->name('tasks.destroy_before');
 Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');
 
+//googleカレンダーの表示
+Route::get('/gc', 'UsersController@gc')->name('users.gc');
+
+//マイメモの表示
+Route::get('/mymemo', 'UsersController@mymemo')->name('users.mymemo');
+
+
 
     //ユーザー情報の変更と削除
     //Route::resource('users', 'UsersController', ['only' => ['update','edit','destroy']]);

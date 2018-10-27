@@ -149,6 +149,18 @@
         </div>
     </li>
 </ul>
+
+<h2>Others</h2>
+    
+                <div>ヘッダーのアイコンなどの説明</<div>
+                <div>
+                <img src="{{ secure_asset("images/header_icons.png") }}" alt="header_icons" style="width:300px"><br>
+                <i class="far fa-calendar-alt fa-2x"></i> カレンダー表示(googleカレンダーのiframeタグの登録が必要)<br>
+                <i class="far fa-comment-alt fa-2x"></i>　自分のメモなどの表示(アカウント管理より登録できます)<br>
+                <i class="fas fa-plus-circle fa-2x" style="color:red;"></i>　タスク登録<br>
+                <i class="fas fa-question-circle fa-2x" style="color:green;"></i>このページへのリンクアイコン<br>
+                </div>
+            
     
 <div>    
 
