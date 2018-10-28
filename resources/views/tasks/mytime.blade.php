@@ -379,6 +379,74 @@ $(function(){
 });
 
 
+/* プッシュ通知 */
+$(function(){
+    
+    $('.push').click(function(){
+        //push通知の内容をセットする
+         var title=$(this).parent().parent().find('.task_title').text();
+         etime=$(this).parent().parent().find('.etime').text();
+         str="Task:"+title+"\n\nの完了予定時間"+etime+"の10分前にアラームをセットしますか?";
+         var r=window.confirm(str);
+         $(this).parent().parent().parent().parent().parent().parent().css('background-color','lightpink');
+        if(r ==false){
+        
+        }else{
+        alert("このページはリフレッシュせず、そのまま開いて置いてください。\n\nリフレッシュするとアラーム設定もなくなります。");
+        $(this).css('display','none');
+        $(this).parent().after('<span style="float: right;margin-right:20px;">Alerm set</span>');
+        var push_body='アラームはセットされました。\n\nTask:'+title;
+                Push.create('Time Master ', {
+                    body: push_body,
+        　　        icon: 'icon.png',
+        　　        timeout: 8000, // 通知が消えるタイミング
+        　　        vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
+        　　        onClick: function() {
+        　　　　        // 通知がクリックされた場合の設定
+        　　　　        console.log(this);
+        　　        }
+                });
+         var str2="Task\n"+title+"\nの10分前になりました\n"+"10 mins till endtime("+etime+")";
+         
+        //10分前の時間を分迄取得する
+        //引数無しで現在日時で生成
+        var date=new Date();
+        //引数有りで指定日時で生成(例は2013年11月20日 2:23)
+        var result = etime.split(':');
+        var ehour=result[0];
+        var emin=result[1];
+        var enddate=new Date(date.getFullYear(),date.getMonth(),date.getDate(),ehour,emin -10);
+        
+        push(str2,enddate);
+        //タイマーで指定時間になったら
+        var timer = setInterval(function(){push(str2,enddate)},1000*60);
+
+        }
+    });
+    
+});
+
+function push(str,enddate){
+    var date=new Date();
+    var nowdate=new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes());
+
+    if(nowdate.toString() == enddate.toString()){
+
+        //alert(str);
+        Push.create('Time Master Alerm！', {
+　          body: str,
+　　        icon: 'icon.png',
+　　        timeout: 8000, // 通知が消えるタイミング
+　　        vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
+　　        onClick: function() {
+　　　　        // 通知がクリックされた場合の設定
+　　　　        console.log(this);
+　　        }
+        });
+    }
+};
+
+
 // -->
 </script>
 

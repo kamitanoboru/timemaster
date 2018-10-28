@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="alert alert-danger" role="alert" style="margin-top:4rem;">{{ $message }}</div>
+<div>自動的にこのウィンドウは閉じられます</div>
 
 <script>
 <!--

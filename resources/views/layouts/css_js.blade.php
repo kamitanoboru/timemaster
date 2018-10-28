@@ -21,9 +21,17 @@
         <link rel="stylesheet" href="{{ secure_asset('css/modal-3.css') }}">
         <script src="{{ secure_asset('js/modal-3.js') }}"></script>
         
-        <!!--ポップアップ-->
+        <!--ポップアップ-->
         <script src="{{ secure_asset('js/jquery.modal_fix.js') }}"></script>          
         
+        <!--プッシュ通知-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
         
         
         <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
+        
+        
+<script>
+Push.Permission.request();
+
+</script>

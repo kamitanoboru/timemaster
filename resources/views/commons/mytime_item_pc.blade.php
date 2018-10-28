@@ -3,7 +3,7 @@
         <tr>
             <td style="width:100%;">
                 <span class="glyphicon glyphicon-hand-up" aria-hidden="true" style="font-size: 130%;"></span>
-                <span class="time">{{ $item_start }}-{{ $item_end }} ( {{ $task -> task_time }}min )</span>
+                <span class="time"><span class="stitme">{{ $item_start }}</span>-<span class="etime">{{ $item_end }}</span> ( {{ $task -> task_time }}min )</span>
                 
                 <!--開始時間遅れ　ドクロマークと指定開始時間表示 -->
                 @if($fix_flag == "on")        
@@ -27,23 +27,30 @@
                 @endif
 
 
-                <span class="task_title">
+                
                     <!--繰り返しタスクマーク-->
                     @if($task -> type == "repeat")        
                         <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>        
                     @endif
                     
-                </span>
-                
-                {{ $task -> title }}     
+                <span class="task_title">{{ mb_strimwidth( $task -> title , 0, 70, "...", "UTF-8" ) }}</span>
+
+                     
                 
                 <!--メモありタスクマーク-->
                 @if(strlen($task -> memo) > 0)
                 <a href="/tasks/{{ $task -> id }}/memo_view" class="modalBtn"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
                 @endif
+
+               
+                <a href="#" class="open_toggle" style="float: right;">edit</a>       
                 
-                <a href="#" class="open_toggle" style="float: right;">edit</a>                
+
+
+         
                 <div class="contents_toggle" style="display:none;float: right;">
+                
+
                 
                 <!--編集アイコン-->
                 <a href="/tasks/{{ $task -> id }}/edit" class="modalBtn"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
@@ -63,6 +70,13 @@
                 <a href="/tasks/{{ $task -> id }}/destroy" class="modalBtn destroy"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span></a>
                 
                 </div>
+
+                @if($list_i <= 3)
+                <!-- push通知-->
+                　<a href="#" style="float: right;margin-right:20px;"><span class="push">Alerm</span></a>　
+                @endif
+ 
+
 
             </td>
         </tr>
