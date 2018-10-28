@@ -23,9 +23,10 @@ $ua = $_SERVER['HTTP_USER_AGENT'];
                     @else
                         {{--PCの場合に読み込むソースを記述--}}
                                 <a class="navbar-left" href="/mytime"><img src="{{ secure_asset("images/logo.png") }}" alt="TimeMaster"></a>
+                                <a class="navbar-icons modalBtn" href="/gc"><i class="far fa-calendar-alt fa-2x"></i></a> 
                     @endif                
 
-                    <a class="navbar-icons modalBtn" href="/gc"><i class="far fa-calendar-alt fa-2x"></i></a> 
+
                    <a class="navbar-icons modalBtn" href="/mymemo"><i class="far fa-comment-alt fa-2x"></i>
                     <a class="navbar-icons" href="/tasks/create"><i class="fas fa-plus-circle fa-2x" style="color:red;"></i></a> 
  
