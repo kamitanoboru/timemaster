@@ -32,6 +32,7 @@
         
         
 <script>
+/*
 Push.Permission.request();
-
+*/
 </script>

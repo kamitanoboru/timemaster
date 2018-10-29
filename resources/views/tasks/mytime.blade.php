@@ -392,9 +392,10 @@ $(function(){
         if(r ==false){
         
         }else{
-        alert("このページはリフレッシュせず、そのまま開いて置いてください。\n\nリフレッシュするとアラーム設定もなくなります。\n\nあと、残念ですが、HEROKUではhttps化していないため、push通知が動きません");
+        alert("このページはリフレッシュせず、そのまま開いて置いてください。\n\nリフレッシュするとアラーム設定もなくなります。\n\nあと、残念ですが、HEROKUではhttps化していないため、push通知が動きません\n\nalertでの通知になります。");
         $(this).css('display','none');
         $(this).parent().after('<span style="float: right;margin-right:20px;">Alerm set</span>');
+        /*
         var push_body='アラームはセットされました。\n\nTask:'+title;
                 Push.create('Time Master ', {
                     body: push_body,
@@ -406,6 +407,7 @@ $(function(){
         　　　　        console.log(this);
         　　        }
                 });
+        */        
          var str2="Task\n"+title+"\nの10分前になりました\n"+"10 mins till endtime("+etime+")";
          
         //10分前の時間を分迄取得する
@@ -432,7 +434,8 @@ function push(str,enddate){
 
     if(nowdate.toString() == enddate.toString()){
 
-        //alert(str);
+        alert(str);
+        /*
         Push.create('Time Master Alerm！', {
 　          body: str,
 　　        icon: 'icon.png',
@@ -443,6 +446,7 @@ function push(str,enddate){
 　　　　        console.log(this);
 　　        }
         });
+        */
     }
 };
 
