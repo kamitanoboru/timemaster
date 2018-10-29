@@ -392,7 +392,7 @@ $(function(){
         if(r ==false){
         
         }else{
-        alert("このページはリフレッシュせず、そのまま開いて置いてください。\n\nリフレッシュするとアラーム設定もなくなります。");
+        alert("このページはリフレッシュせず、そのまま開いて置いてください。\n\nリフレッシュするとアラーム設定もなくなります。\n\nあと、残念ですが、HEROKUではhttps化していないため、push通知が動きません");
         $(this).css('display','none');
         $(this).parent().after('<span style="float: right;margin-right:20px;">Alerm set</span>');
         var push_body='アラームはセットされました。\n\nTask:'+title;

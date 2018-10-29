@@ -730,6 +730,7 @@ exit;
             'zone' => $task->zone,
             'task_order' => $task->task_order,
             'memo' => $task->memo,
+            'fix_start' => $task ->fix_start,
         ]);           
            
            

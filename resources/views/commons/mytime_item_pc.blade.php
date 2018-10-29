@@ -43,7 +43,7 @@
                 @endif
 
                
-                <a href="#" class="open_toggle" style="float: right;">edit</a>       
+                <a class="open_toggle" style="float: right;">edit</a>       
                 
 
 
