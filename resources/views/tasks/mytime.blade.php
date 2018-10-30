@@ -64,8 +64,11 @@ $youbi=$week[$date] . '曜日';
 <div class="print_link"><a href="#" onclick="window.print(); return false;">PRINT</a></div>
 @endif
 
-<h3 class="mytime-title">{{ $this_day_str }}'s Tasks & Schedule({{ $max_cnt }} Items)</h3>
-<h4 class="mytime-title">{{ $this_day }}({{ $youbi }})<i class="fas fa-running fa-3x" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
+<h3 class="mytime-title">
+{{ $this_day_str }}'s <button class="btn btn-primary" type="button">  Tasks <span class="badge">{{ $max_cnt }}</span>
+</button> & Schedule
+</h3>
+<h4 class="mytime-title">{{ $this_day }}({{ $youbi }})<i class="fas fa-running" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
 
 <!--印刷表示出ない場合はアイコンを出す-->
 @if($print != "print")
@@ -215,7 +218,7 @@ $i=$i+1;
 -->
 
      <button id="data_post2" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;" alt="再計算する"></i></button>
-
+<button id="nowtime" type="button">現在時刻にする</button>
     </div>
 @else
 <!--javascriptのエラー対策　コントローラーで必要なので削除禁止 -->
@@ -307,6 +310,22 @@ document.getElementById( "min" ).value = minute;
 //1分毎に表示
 mytime();
 setInterval('mytime()',1000*60);
+
+$(function () {
+   $('#nowtime').click(function(){
+       
+       var date= new Date();
+        
+        //時・分・秒を取得する
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        
+        //
+        document.getElementById( "hour" ).value = hour ;
+        document.getElementById( "min" ).value = minute;
+   });
+});
+
 
 //#mytime_postのところに「go」という文字があれば、フォームを自動ポストする
 function mytime_post(){
