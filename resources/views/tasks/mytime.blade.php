@@ -218,7 +218,7 @@ $i=$i+1;
 -->
 
      <button id="data_post2" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;" alt="再計算する"></i></button>
-<button id="nowtime" type="button">現在時刻にする</button>
+<button id="nowtime" type="button">10分後開始にする</button>
     </div>
 @else
 <!--javascriptのエラー対策　コントローラーで必要なので削除禁止 -->
@@ -295,7 +295,9 @@ jQuery(function() {
 //時刻データを取得して変数jikanに格納する
 function mytime(){
 //10分足す
-var jikan= new Date(+new Date() + (10 * 60 * 1000));
+//var jikan= new Date(+new Date() + (10 * 60 * 1000));
+//現在時間
+var jikan= new Date(+new Date());
 
 //時・分・秒を取得する
 var hour = jikan.getHours();
@@ -314,7 +316,8 @@ setInterval('mytime()',1000*60);
 $(function () {
    $('#nowtime').click(function(){
        
-       var date= new Date();
+       //10分足す
+        var date= new Date(+new Date() + (10 * 60 * 1000));
         
         //時・分・秒を取得する
         var hour = date.getHours();
