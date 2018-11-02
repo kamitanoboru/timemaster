@@ -73,11 +73,13 @@ $youbi=$week[$date] . '曜日';
 <!--印刷表示出ない場合はアイコンを出す-->
 @if($print != "print")
 <div id="icons-mytime">
+
 <a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
 {!! $nextbefore !!}
     <!--明日のリストの場合は印刷は出さない-->
     @if($tm == null)
     <a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
+    <a class="navbar-left" href="/mytime/zone"><i class="fas fa-coffee fa-2x inner" style="color:aqua;margin-left: 1rem;"></i></a>
     @endif
 <button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
 </div>
@@ -243,6 +245,10 @@ $i=$i+1;
 
 <script>
 <!--
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 
 //対象日付の確定 今日か明日で背景色を変える
 @if($tm == null)

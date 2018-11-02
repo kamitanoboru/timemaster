@@ -185,9 +185,14 @@ class TasksController extends Controller
             $today=date('Y-m-d');    
 
         //表示用の抽出、ソート
+        if($print == "zone"){
+        //本日以前のタスクで、未完了のもの、zone順
+            $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('zone')->orderby('start_date')->get();
+            $print = null;//印刷用ではないので
+        }else{
         //本日以前のタスクで、未完了のもの、task_order順、zone順
            $tasks=$user -> tasks() ->whereDate('start_date','<=',$today)->where('status','unfinished')->orderby('task_order')->orderby('zone')->orderby('start_date')->get();
-
+        }
 
         //これを配列$tasksとしてviewに渡す
 
