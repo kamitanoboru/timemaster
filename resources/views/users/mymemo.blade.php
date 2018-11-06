@@ -24,7 +24,19 @@ $mymemo=htmlspecialchars_decode($user -> mymemo);
         マイメモをアカウント管理から登録すると、ここに表示されます。<br>
         今月のテーマや確認事項などを書いておくことができます。
         @else
-        {!! $mymemo !!}
+        
+        
+    {!! Form::model($user, ['route' => ['users.mymemo_update'], 'method' => 'post']) !!}
+    
+        <div class="form-group">
+        {!! Form::textarea('mymemo',$user -> mymemo,['class'=>'form-control','id' => 'mymemo']) !!}
+        </div>        
+                    
+        {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
+
+    {!! Form::close() !!}
+        
+        
         @endif
     </div>
 @endif

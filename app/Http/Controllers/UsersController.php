@@ -141,4 +141,33 @@ class UsersController extends Controller
         return view('users/mymemo');
     }
     
+    
+        /*マイメモの更新*/
+                public function mymemo_update(Request $request){
+
+        //ユーザー認証からユーザーidを得る
+        $id=\Auth::id();
+        
+        //バリデーション
+        $mymemo = htmlspecialchars($request -> mymemo);           
+        
+        //同じ場合、そのidのユーザー情報をPOSTされたデータで更新する
+ 
+            $request->user()->where('id', $id)->update([
+                'mymemo' => $mymemo,
+            ]);
+        
+ 
+        
+        
+        //もとの表示ページに飛ばす
+
+        return view('users/mymemo');
+
+    }    
+    
+    
+    
+    
+    
 }

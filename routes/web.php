@@ -82,9 +82,12 @@ Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');
 //googleカレンダーの表示
 Route::get('/gc', 'UsersController@gc')->name('users.gc');
 
+
 //マイメモの表示
 Route::get('/mymemo', 'UsersController@mymemo')->name('users.mymemo');
 
+//マイメモの更新
+Route::post('/mymemo', 'UsersController@mymemo_update')->name('users.mymemo_update');
 
 
     //ユーザー情報の変更と削除
