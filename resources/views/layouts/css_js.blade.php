@@ -30,6 +30,16 @@
         
         <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
         
+        <!--スマホ用ブックマークアイコン指定-->
+        <!--  スマホ用基本 -->
+<link rel="apple-touch-icon-precomposed" href="画像のURLをセット">
+<!--  iPad用基本 -->
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ secure_asset('images/76.png') }}">
+<!--  スマホのRetina用 -->
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ secure_asset('images/120.png') }}">
+<!--  iPadのRetina用 -->
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ secure_asset('images/152.png') }}">
+        
         
 <script>
 /*
