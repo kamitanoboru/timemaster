@@ -51,6 +51,7 @@
                 @if($tm == null)
                   <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info" id="plus1">＋1</span></a>
                   <a href="/changedate/{{ $task -> id }}/2" class="modalBtn"><span class="label label-info" id="plus2">＋2</span></a>
+                  <a href="/changedate/{{ $task -> id }}/6" class="modalBtn"><span class="label label-info" id="plus6">＋6</span></a>
                   <a href="/changedate/{{ $task -> id }}/7" class="modalBtn"><span class="label label-info" id="plus7">＋7</span></a>
                 @else
                   <a href="/changedate/{{ $task -> id }}/2" class="modalBtn"><span class="label label-info" id="plus1">＋1</span></a>
