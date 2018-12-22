@@ -71,7 +71,7 @@ $('.clockpicker').clockpicker();
         <div class="form-group form-little">
         {!! Form::label('task_time', '所要時間:') !!}<br>
         <input type="number" id="height" name="task_time_hours" placeholder="5分刻みで設定できます" step="1" value="0" style="width: 4rem;"/>時間
-        <input type="number" id="height" name="task_time_mins" placeholder="5分刻みで設定できます" step="5" value="20" style="width: 4rem;"/>分
+        <input type="number" id="height" name="task_time_mins" placeholder="5分刻みで設定できます" step="5" value="15" style="width: 4rem;"/>分
         </div>           
         <div class="form-group form-little">
         {!! Form::label('type', 'タイプ:') !!}<br>
