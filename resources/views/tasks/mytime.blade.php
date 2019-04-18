@@ -266,7 +266,7 @@ $(function() {
 
 $(function() {
     $('.mytimelist').on('mousedown', function() {
-        $(this).css('background-color','aqua');
+        $(this).css('background-color','azure');
         $(this).css('border','solid 2px blue');
     });
     $('.mytimelist').on('mouseup', function() {
@@ -275,6 +275,12 @@ $(function() {
         $('#mytime_post').css('background-color','cornsilk');
 
     });  
+});
+
+//新規タスクボーダーの左にaquqマーカー入れる
+$(function() {
+    $('.newlist').parent().parent().parent().parent().parent().css('border-left','8px solid aqua');
+    
 });
  
 
@@ -397,11 +403,10 @@ $(function(){
         
         $(this).next('.contents_toggle').toggle();
         if($(this).text() == "close"){
-        $(this).text("edit");
+        $(this).html('<i class="fas fa-edit fa-2x"></i>');
             
         }else{
-        $(this).text("close");
-            
+        $(this).html('<i class="fas fa-door-closed fa-2x"></i>');            
         }
     });
 });

@@ -56,7 +56,7 @@ footer {
 }
 
 .sortable>.fix-on{
-    background-color: yellow;
+    border-left:8px solid yellow;
 }
 
 ul{
@@ -387,6 +387,11 @@ li .time{
 
 .print_link{
     float: right;
+}
+
+.mb-3{
+    margin-bottom:1rem;
+    
 }
 
 
