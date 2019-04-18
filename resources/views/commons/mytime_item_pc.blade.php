@@ -2,7 +2,6 @@
     <table class="table-condensed" style="width:100%;">
         <tr>
             <td style="width:100%;">
-                <span class="glyphicon glyphicon-hand-up" aria-hidden="true" style="font-size: 130%;"></span>
                 <span class="time"><span class="stitme">{{ $item_start }}</span>-<span class="etime">{{ $item_end }}</span> ( {{ $task -> task_time }}min )</span>
                 
                 <!--開始時間遅れ　ドクロマークと指定開始時間表示 -->
@@ -17,8 +16,10 @@
                 @endif
                 
                 <!--開始日時が今日より前に日付を表示-->
-                @if($task -> start_date < date('Y-m-d'))        
-                  <span class="label label-default date-list">{{ $task -> start_date }}</span>  
+                @if($task -> start_date < date('Y-m-d'))
+                <!--
+                  <span class="label label-default date-list">{{ $task -> start_date }}</span>
+                 --> 
                 @endif
                 
                 <!--新着タスク　若葉マーク-->
@@ -74,7 +75,9 @@
 
                 @if($list_i <= 3)
                 <!-- push通知-->
-                　<a href="#" style="float: right;margin-right:20px;"><span class="push">Alerm</span></a>　
+                <!--
+                　<a href="#" style="float: right;margin-right:20px;"><span class="push">Alerm</span></a>
+                -->　
                 @endif
  
 
