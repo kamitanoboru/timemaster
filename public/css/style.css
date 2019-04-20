@@ -227,6 +227,12 @@ background-color: cyan;
     max-width: 70%;    
 }
 
+.front-plus1{
+    float: right;
+    margin-left: 1rem;
+    padding: 8px 3px;
+}
+
 #toggle{
     font-size:1.3rem;
     font-weight:bold;

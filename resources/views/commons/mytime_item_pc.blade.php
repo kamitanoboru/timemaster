@@ -46,7 +46,7 @@
                 <a href="/tasks/{{ $task -> id }}/memo_view" class="modalBtn"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
                 @endif
 
-               
+　              <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info front-plus1" id="plus1">＋1D</span></a>
                 <a class="open_toggle" style="float: right;"><i class="fas fa-edit fa-2x"></i></a>       
                 
 
