@@ -232,6 +232,11 @@ background-color: cyan;
     margin-left: 1rem;
     padding: 8px 3px;
 }
+.front-destroy{
+    float: right;
+    margin-left: 1rem;
+    /*padding: 8px 3px;*/
+}
 
 #toggle{
     font-size:1.3rem;

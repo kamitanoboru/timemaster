@@ -47,6 +47,8 @@
                 @endif
 
 　              <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info front-plus1" id="plus1">＋1D</span></a>
+                <!--削除アイコン-->
+                <a href="/tasks/{{ $task -> id }}/destroy" class="modalBtn destroy front-destroy"><i class="fas fa-trash-alt fa-2x"></i></a>              
                 <a class="open_toggle" style="float: right;"><i class="fas fa-edit fa-2x"></i></a>       
                 
 

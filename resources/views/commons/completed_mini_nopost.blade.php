@@ -5,10 +5,11 @@
 <div class="alert alert-danger" role="alert" style="margin-top:4rem;">{{ $message }}</div>
 <div>自動的にこのウィンドウは閉じられます</div>
 
+
 <script>
 <!--
     $(function() {
-        
+ 
         
         //親ウィンドウをリロード これで子ウィンドウも一緒になくなる
         function func1(){
@@ -17,8 +18,8 @@
             $('#mytime_post',parent.document).text('一連の変更処理後、計算機のアイコンを押してください');
         }
         function func2(){
-            $('ul .{{ $list_id }}',parent.document).animate({opacity:0},3000)
-        }
+            $("ul>.{{ $list_id }}",parent.document).css('display','none');
+            }
         
         //子ウィンドウを閉じる
         
