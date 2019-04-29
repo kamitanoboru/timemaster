@@ -19,7 +19,7 @@ $start_date=null;
 //ランダムな英数字の生成
 $str = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPUQRSTUVWXYZ';
 $str_r = substr(str_shuffle($str), 0, 10);
-$fcsv="tdata/".$str_r.".csv";
+$fcsv="taskall/".$str_r.".csv";
 $f_head="id,user_id,title,type,start_date,task_time,zone,task_order,status,memo,created_at,updated_at,fix_start\n";
 $fp=fopen($fcsv,"w");
 fwrite($fp,$f_head);
