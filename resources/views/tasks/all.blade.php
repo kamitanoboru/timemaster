@@ -15,6 +15,23 @@ $start_date=null;
 
 
 
+@php
+
+//ランダムな英数字の生成
+$str = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPUQRSTUVWXYZ';
+$str_r = substr(str_shuffle($str), 0, 10);
+$fcsv="tdata/".$str_r.".csv";
+$f_head="id,user_id,title,type,start_date,task_time,zone,task_order,status,memo,created_at,updated_at,fix_start\n";
+$fp=fopen($fcsv,"w");
+fwrite($fp,$f_head);
+//オブジェクトを配列に
+//$array = (array)$tasks;
+$array = json_decode(json_encode($tasks), true);
+foreach ($array as $task) fputcsv($fp,$task);  
+@endphp
+<h4><a href="/{{ $fcsv }}">全タスクデータ作成★</h4>
+
+
 <ul class="ul-list">
     @foreach($tasks as $task)
         @if($start_date == $task -> start_date)
