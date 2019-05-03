@@ -46,7 +46,7 @@
                 <a href="/tasks/{{ $task -> id }}/memo_view" class="modalBtn"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" id="my-button"></span></a>
                 @endif
 
-　              <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info front-plus1" id="plus1">＋1D</span></a>
+　              <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info front-plus1" id="plus1" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(1) }}">＋1D</span></a>
                 <!--削除アイコン-->
                 <a href="/tasks/{{ $task -> id }}/destroy" class="modalBtn destroy front-destroy"><i class="fas fa-trash-alt fa-2x"></i></a>              
                 <a class="open_toggle" style="float: right;"><i class="fas fa-edit fa-2x"></i></a>       
@@ -66,22 +66,22 @@
                     <div class="mb-3">
                     <!--開始日変更ラベル-->
                     @if($tm == null)
-                      <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info" id="plus1">＋1D</span></a>
-                      <a href="/changedate/{{ $task -> id }}/2" class="modalBtn"><span class="label label-info" id="plus2">＋2D</span></a>
-                      <a href="/changedate/{{ $task -> id }}/3" class="modalBtn"><span class="label label-info" id="plus3">＋3D</span></a>
-                      <a href="/changedate/{{ $task -> id }}/4" class="modalBtn"><span class="label label-info" id="plus4">＋4D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/1" class="modalBtn"><span class="label label-info" id="plus1" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(1) }}">＋1D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/2" class="modalBtn"><span class="label label-info" id="plus2" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(2) }}">＋2D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/3" class="modalBtn"><span class="label label-info" id="plus3" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(3) }}">＋3D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/4" class="modalBtn"><span class="label label-info" id="plus4" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(4) }}">＋4D</span></a>
                      </div>
                      <div class="mb-3">
-                      <a href="/changedate/{{ $task -> id }}/5" class="modalBtn"><span class="label label-info" id="plus5">＋5D</span></a>
-                      <a href="/changedate/{{ $task -> id }}/6" class="modalBtn"><span class="label label-info" id="plus6">＋6D</span></a>                  
-                      <a href="/changedate/{{ $task -> id }}/7" class="modalBtn"><span class="label label-info" id="plus7">＋7D</span></a>
-                      <a href="/changedate/{{ $task -> id }}/8" class="modalBtn"><span class="label label-info" id="plus8">＋8D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/5" class="modalBtn"><span class="label label-info" id="plus5" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(5) }}">＋5D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/6" class="modalBtn"><span class="label label-info" id="plus6" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(6) }}">＋6D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/7" class="modalBtn"><span class="label label-info" id="plus7" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(7) }}">＋7D</span></a>
+                      <a href="/changedate/{{ $task -> id }}/8" class="modalBtn"><span class="label label-info" id="plus8" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(8) }}">＋8D</span></a>
                      </div>
                      <div class="mb-3">
-                      <a href="/changedate/{{ $task -> id }}/14" class="modalBtn"><span class="label label-info" id="plus14">＋2W</span></a>
-                      <a href="/changedate/{{ $task -> id }}/30" class="modalBtn"><span class="label label-info" id="plus30">＋1M</span></a>                  
-                      <a href="/changedate/{{ $task -> id }}/180" class="modalBtn"><span class="label label-info" id="plus180">＋6M</span></a>
-                      <a href="/changedate/{{ $task -> id }}/365" class="modalBtn"><span class="label label-info" id="plus365">＋1Y</span></a>
+                      <a href="/changedate/{{ $task -> id }}/14" class="modalBtn"><span class="label label-info" id="plus14" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(14) }}">＋2W</span></a>
+                      <a href="/changedate/{{ $task -> id }}/30" class="modalBtn"><span class="label label-info" id="plus30" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(30) }}">＋1M</span></a>
+                      <a href="/changedate/{{ $task -> id }}/180" class="modalBtn"><span class="label label-info" id="plus180" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(180) }}">＋6M</span></a>
+                      <a href="/changedate/{{ $task -> id }}/365" class="modalBtn"><span class="label label-info" id="plus365" data-toggle="tooltip" data-placement="down" title="{{ get_date_and_week(365) }}">＋1Y</span></a>
                     @else
                       <a href="/changedate/{{ $task -> id }}/2" class="modalBtn"><span class="label label-info" id="plus1">＋1</span></a>
                       <a href="/changedate/{{ $task -> id }}/3" class="modalBtn"><span class="label label-info" id="plus2">＋2</span></a>

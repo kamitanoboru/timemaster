@@ -10,6 +10,14 @@
 $id = Auth::id();
 $user=\App\User::find($id);
 
+//PHPの関数を入れてみる
+function get_date_and_week($n){
+    $weekday = array( "日", "月", "火", "水", "木", "金", "土" );
+    $date = new DateTime(date('Y-m-d'));
+    $date->modify('+'.$n.'day');
+    return $date->format('Y-m-d') .'　'.$weekday[$date->format('w')]."曜日";
+}
+
 //対象日付の確定 今日か明日
 if($tm == null){
     $this_day=date("Y-m-d");
@@ -247,7 +255,8 @@ $i=$i+1;
 <!--
 
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+　//すでにあるtooltipと鑑賞してているかも
+  //$('[data-toggle="tooltip"]').tooltip()
 })
 
 //対象日付の確定 今日か明日で背景色を変える
