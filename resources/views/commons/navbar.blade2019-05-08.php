@@ -16,36 +16,36 @@ $ua = $_SERVER['HTTP_USER_AGENT'];
 
                     @if ((strpos($ua, 'Android') !== false) && (strpos($ua, 'Mobile') !== false) || (strpos($ua, 'iPhone') !== false) || (strpos($ua, 'Windows Phone') !== false))
                         {{--スマホの場合に読み込むソースを記述--}}
-                                <a class="navbar-logo navbar-brand" href="/mytime">TimeMaster</a>
+                                <a class="navbar-logo" href="/mytime"><img src="{{ secure_asset("images/logo_mini.png") }}" alt="TimeMaster"></a>
                     @elseif ((strpos($ua, 'Android') !== false) || (strpos($ua, 'iPad') !== false))
                         {{--タブレットの場合に読み込むソースを記述--}}
-                                <a class="navbar-logo navbar-brand" href="/mytime">TimeMaster</a>
+                                <a class="navbar-logo" href="/mytime"><img src="{{ secure_asset("images/logo_mini.png") }}" alt="TimeMaster"></a>
                     @else
                         {{--PCの場合に読み込むソースを記述--}}
-                                <a class="navbar-logo navbar-brand" href="/mytime">TimeMaster</a>
-                                <a class="navbar-icons modalBtn" href="/gc"><i class="fab fa-google fa-2x" style="color:#9d9d9d;"></i></a> 
+                                <a class="navbar-logo" href="/mytime"><img src="{{ secure_asset("images/logo.png") }}" alt="TimeMaster"></a>
+                                <a class="navbar-icons modalBtn" href="/gc"><i class="far fa-calendar-alt fa-2x"></i></a> 
                     @endif                
 
 
-                   <a class="navbar-icons modalBtn" href="/mymemo"><i class="fas fa-pen-square fa-2x" style="color:#9d9d9d;"></i>
+                   <a class="navbar-icons modalBtn" href="/mymemo"><i class="far fa-comment-alt fa-2x"></i>
                     <a class="navbar-icons" href="/tasks/create"><i class="fas fa-plus-circle fa-2x" style="color:red;"></i></a> 
  
                 @else
                 
                     @if ((strpos($ua, 'Android') !== false) && (strpos($ua, 'Mobile') !== false) || (strpos($ua, 'iPhone') !== false) || (strpos($ua, 'Windows Phone') !== false))
                         {{--スマホの場合に読み込むソースを記述--}}
-                                <a class="navbar-logo navbar-brand" href="/">TimeMaster</a>
+                                <a class="navbar-logo"" href="/"><img src="{{ secure_asset("images/logo_mini.png") }}" alt="TimeMaster"></a>
                     @elseif ((strpos($ua, 'Android') !== false) || (strpos($ua, 'iPad') !== false))
                         {{--タブレットの場合に読み込むソースを記述--}}
-                                <a class="navbar-logo navbar-brand" href="/">TimeMaster</a>
+                                <a class="navbar-logo"" href="/"><img src="{{ secure_asset("images/logo_mini.png") }}" alt="TimeMaster"></a>
                     @else
                         {{--PCの場合に読み込むソースを記述--}}
-                                <a class="navbar-logo navbar-brand" href="/">TimeMaster</a>
+                                <a class="navbar-logo" href="/"><img src="{{ secure_asset("images/logo.png") }}" alt="TimeMaster"></a>
                     @endif                
   
                 @endif
                 
-               <a class="navbar-icons" href="/intro"><i class="fas fa-question-circle fa-2x" style="color:#9d9d9d;"></i></a>
+               <a class="navbar-icons" href="/intro"><i class="fas fa-question-circle fa-2x" style="color:green;"></i></a>
 
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -73,23 +73,24 @@ $youbi=$week[$date] . '曜日';
 @endif
 
 <h3 class="mytime-title">
-{{ $this_day_str }}'s <button class="btn btn-primary" type="button">  Tasks <span class="badge">{{ $max_cnt }}</span>
-</button> & Schedule
+{{ $this_day_str }}'s Schedule <button class="btn btn-dark" type="button">  Tasks <span class="badge">{{ $max_cnt }}</span>
+</button>
 </h3>
-<h4 class="mytime-title">{{ $this_day }}({{ $youbi }})<i class="fas fa-running" id="run-mytime"></i>Start Time:{{ $start_time }}</h4>
+<h4 class="mytime-title">{{ $this_day }}({{ $youbi }}) {{ $start_time }}</h4>
 
 <!--印刷表示出ない場合はアイコンを出す-->
 @if($print != "print")
 <div id="icons-mytime">
-
+<!--
 <a class="navbar-left" href="/tasks/create"><i class="fas fa-plus-circle fa-2x inner" style="color:red;margin-right: 1rem;"></i></a>
+-->
 {!! $nextbefore !!}
     <!--明日のリストの場合は印刷は出さない-->
     @if($tm == null)
     <a class="navbar-left" href="/mytime/print"><span class="glyphicon glyphicon-print" aria-hidden="true" style="font-size: 2.5rem;"></span></a>
     <a class="navbar-left" href="/mytime/zone"><i class="fas fa-coffee fa-2x inner" style="color:aqua;margin-left: 1rem;"></i></a>
     @endif
-<button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;float:right;" alt="再計算する"></i></button>
+<button id="data_post" class="btn" style="float: right;background-color: inherit;"><i class="fas fa-calculator fa-2x" style="float:right;" alt="再計算する"></i></button>
 </div>
 @endif
 
@@ -227,7 +228,7 @@ $i=$i+1;
 <button id="submit" class="btn btn-primary center-block" style="text-align:center;">再計算する</button>
 -->
 
-     <button id="data_post2" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" style="color:blue;" alt="再計算する"></i></button>
+     <button id="data_post2" type="submit" class="btn" style="background-color: inherit;"><i class="fas fa-calculator fa-2x" alt="再計算する"></i></button>
 <button id="nowtime" type="button">10分後開始にする</button>
     </div>
 @else
@@ -281,7 +282,7 @@ $(function() {
     $('.mytimelist').on('mouseup', function() {
         $(this).css('border','inherit');
         $('#mytime_post').text('計算機アイコンをクリックすると保存されます');
-        $('#mytime_post').css('background-color','cornsilk');
+        $('#mytime_post').css('font-weight','bold');
 
     });  
 });

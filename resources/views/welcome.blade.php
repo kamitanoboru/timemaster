@@ -6,9 +6,9 @@
             <div class="cover-contents">
                 <h1>TIME MASTER</h1>
                 @if (Auth::check())
-                    <a href="mytime" class="btn btn-success btn-lg">マイタイムに行く</a>
+                    <a href="mytime" class="btn btn-success btn-lg">Go to Mytime!</a>
                 @else
-                <a href="/intro" class="btn btn-success btn-lg">時間の効率化を手にしますか?</a>
+                <a href="/intro" class="btn btn-success btn-lg">Let's make your time!</a>
                 @endif
             </div>
         </div>
