@@ -6,6 +6,7 @@ body {
 }
 footer {
     margin-top: 40px;
+    margin-bottom: 10px;
 }
 
 /* navbar */
@@ -22,6 +23,11 @@ footer {
     margin-left: 10px;
     position: relative;
     top: 10px;
+}
+
+/* login form */
+#login{
+    margin-top: 7rem;
 }
 
 /* cover */
