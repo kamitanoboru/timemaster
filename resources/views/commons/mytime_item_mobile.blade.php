@@ -30,6 +30,17 @@
         </tr>
         <tr>
             <td style="width:95%;">
+                
+                   <span>
+                @if($task -> importance == true && $task -> emergency == true)
+                    <i class="fas fa-bookmark fa-2x imp-1"></i>
+                @elseif($task -> importance == true && $task -> emergency == false)    
+                    <i class="fas fa-bookmark fa-2x imp-2"></i>
+                @elseif($task -> importance == false && $task -> emergency == true)    
+                    <i class="fas fa-bookmark fa-2x imp-3"></i>
+                @endif
+                </span>             
+                
                 <span class="task_title">
                     <!--繰り返しタスクマーク-->
                     @if($task -> type == "repeat")        

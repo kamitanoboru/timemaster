@@ -18,8 +18,14 @@ $user = Auth::user();
         {!! Form::text('title',null,['class'=>'form-control']) !!}
         </div>
         {!! Form::submit('タスク追加', ['class' => 'btn btn-primary']) !!}
-        <h3><span class="label label-success">以下詳細設定</span></h3>
         
+        
+
+        <h3><span class="label label-success">以下詳細設定</span></h3>
+        {!! Form::label('importance', '重要:') !!}
+        {{Form::checkbox('importance')}}
+        {!! Form::label('emergency', '緊急:') !!}
+        {{Form::checkbox('emergency')}}        
         <!--
         <div class="form-group">        
         {!! Form::label('start_date', '開始日:') !!}

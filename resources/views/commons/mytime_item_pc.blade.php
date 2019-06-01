@@ -37,6 +37,15 @@
                     @endif
                 </td>
                 <td>
+                <span>
+                @if($task -> importance == true && $task -> emergency == true)
+                    <i class="fas fa-bookmark fa-2x imp-1"></i>
+                @elseif($task -> importance == true && $task -> emergency == false)    
+                    <i class="fas fa-bookmark fa-2x imp-2"></i>
+                @elseif($task -> importance == false && $task -> emergency == true)    
+                    <i class="fas fa-bookmark fa-2x imp-3"></i>
+                @endif
+                </span>
                 <span class="task_title">{{ mb_strimwidth( $task -> title , 0, 70, "...", "UTF-8" ) }}</span>
 
                      

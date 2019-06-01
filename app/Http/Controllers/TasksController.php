@@ -59,6 +59,8 @@ class TasksController extends Controller
             'task_time_hours' => 'required|digits_between:1,100',
             'task_time_mins' => 'required|digits_between:0,360',
             'zone' => 'required|digits_between:1,7',
+            'importance' => 'boolean',
+            'emergency' => 'boolean',
             ]);
         
         //ユーザーチェック
@@ -98,6 +100,8 @@ class TasksController extends Controller
             'task_order' => '999',
             'memo' => $request->memo,
             'fix_start' => $fix_start,
+            'importance' => $request->importance,
+            'emergency' => $request->emergency,
         ]);
 
         //処理完了ページにメッセージとともに飛ばす
@@ -527,6 +531,8 @@ exit;
             'task_time_hours' => 'required|digits_between:1,100',
             'task_time_mins' => 'required|digits_between:0,360',
             'zone' => 'required|digits_between:1,7',
+            'importance' => 'boolean',
+            'emergency' => 'boolean',            
             ]);
 
         //ユーザーチェック
@@ -566,6 +572,8 @@ exit;
             'zone' => $request->zone,
             'memo' => $request->memo,
             'fix_start' => $fix_start,
+            'importance' => $request->importance,
+            'emergency' => $request->emergency,            
         ]);
         
 

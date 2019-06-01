@@ -112,9 +112,21 @@ ul{
     
 }
 
+.fas.imp-1{
+    color:orange;
+}
+.fas.imp-2{
+    color:aqua;
+}
+.fas.imp-3{
+    color:yellow;
+}
 
-
-
+input[type=checkbox] {
+  -ms-transform: scale(1.5, 1.5);
+  -webkit-transform: scale(1.5, 1.5);
+  transform: scale(1.5, 1.5);
+}
 
 .modal-content {
     position:fixed;

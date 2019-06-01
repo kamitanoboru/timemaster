@@ -26,6 +26,11 @@ $user = Auth::user();
         </div>
  
         <h3><span class="label label-success">以下詳細設定</span></h3>
+        {!! Form::label('importance', '重要:') !!}
+        <input type="checkbox" name="importance" value="1" @if($task -> importance == 1) checked @endif>
+        {!! Form::label('emergency', '緊急:') !!}
+        <input type="checkbox" name="emergency" value="1" @if($task -> emergency == 1) checked @endif>    
+        
 @php
 $today_date=date('Y-m-d');
 $tomorrow=date('Y-m-d', strtotime('+1 day'));
