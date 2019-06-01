@@ -2,6 +2,7 @@
 
 @section('content')
 
+  
 <!-- ここにページ毎のコンテンツを書く -->
 @if (Auth::check())
 @php

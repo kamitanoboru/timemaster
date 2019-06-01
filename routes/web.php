@@ -79,6 +79,10 @@ Route::post('tasks/update_memo', 'TasksController@update_memo')->name('tasks.upd
 Route::get('tasks/{id}/destroy', 'TasksController@destroy_before')->name('tasks.destroy_before');
 Route::post('tasks/destroy', 'TasksController@destroy')->name('tasks.destroy');
 
+//タスクのCSVインポート
+Route::get('/csv', 'TasksController@import_before')->name('tasks.import_before');
+Route::post('/csv', 'TasksController@import')->name('tasks.import');
+
 //googleカレンダーの表示
 Route::get('/gc', 'UsersController@gc')->name('users.gc');
 
@@ -97,6 +101,9 @@ Route::post('/mymemo', 'UsersController@mymemo_update')->name('users.mymemo_upda
     Route::post('users/destroy', 'UsersController@destroy')->name('users.destroy');    
     // マイタイムの表示
     //Route::resource('/mytime', 'UsersController', ['only' => ['index']]);
+    
+    
+
 
 
 });

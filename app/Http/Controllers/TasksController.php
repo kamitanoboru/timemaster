@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
+//useしないと 自動的にnamespaceのパスが付与されるのでuse
+use SplFileObject;
+
 use App\User;
 use App\Task;
 
@@ -764,4 +767,129 @@ exit;
         return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id' => $list_id]);
         
     }
+    
+    
+    public function import_before()
+    {
+
+        //ログインチェックNGの場合はトップにリダイレクト
+        if(\Auth::check() == false){
+            $message="ログインされていないと判断されました";
+            $redirect="トップページ";
+            $url="/";
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);            
+        }
+
+        return view('tasks/csv_import');
+    }
+
+    public function import(Request $request)
+    {
+        
+
+        //ユーザーチェック
+        //ユーザー認証からユーザーidを得る
+        $id=\Auth::id();
+
+        //一応POSTされた$user_idがそれと同じがチェックする
+        //同じでなければ、ログアウトさせてしまう
+        if($id != $request->user_id){
+            $message="経路エラーのため更新は行われませんでした";
+            $redirect="マイタイムページ";
+            $url="/mytime";
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+        }        
+
+
+        setlocale(LC_ALL, 'ja_JP.UTF-8');
+
+        $uploaded_file = $request->file('csv_file');
+
+        $file_path = $request->file('csv_file')->path($uploaded_file);
+
+        $file = new SplFileObject($file_path);
+        $file->setFlags(SplFileObject::READ_CSV);
+
+        //配列の箱を用意
+        $array = [];
+
+        $row_count = 1;
+        
+        foreach ($file as $row)
+        {
+
+            if ($row === [null]) continue; 
+            
+            if ($row_count > 1)
+            {
+            
+                $title = mb_convert_encoding($row[0], 'UTF-8', 'SJIS');
+                $type = mb_convert_encoding($row[1], 'UTF-8', 'SJIS');
+                $start_date = mb_convert_encoding($row[2], 'UTF-8', 'SJIS');
+                $task_time = mb_convert_encoding($row[3], 'UTF-8', 'SJIS');
+                $importance = mb_convert_encoding($row[4], 'UTF-8', 'SJIS');
+                $emergency = mb_convert_encoding($row[5], 'UTF-8', 'SJIS');
+                
+                //null処理
+                if($importance == null){
+                    $importance=0;
+                }
+                if($emergency == null){
+                    $emergency=0;
+                }
+            
+                $csvimport_array = [
+                    'user_id' => $id,
+                    'title' => $title,
+                    'type' => $type,
+                    'start_date' => $start_date,
+                    'task_time' => $task_time,
+                    'importance' => $importance,
+                    'emergency' => $emergency,
+                ];
+
+                // つくった配列の箱($array)に追加
+                array_push($array, $csvimport_array);
+            }
+
+            $row_count++;
+
+        }
+        
+        //追加した配列の数を数える
+        $array_count = count($array);
+
+        //もし配列の数が500未満なら
+        if ($array_count < 500){
+
+            //配列をまるっとインポート(バルクインサート)
+            Task::insert($array);
+
+
+        } else {
+            
+            //追加した配列が500以上なら、array_chunkで500ずつ分割する
+            $array_partial = array_chunk($array, 500); //配列分割
+    
+            //分割した数を数えて
+            $array_partial_count = count($array_partial); //配列の数
+
+            //分割した数の分だけインポートを繰り替えす
+            for ($i = 0; $i <= $array_partial_count - 1; $i++){
+            
+                Task::insert($array_partial[$i]);
+            
+            }
+
+        }
+        
+        //処理完了ページにメッセージとともに飛ばす
+        $message=$array_count."件のタスクがインポートされました";
+        $redirect="マイタイムページ";
+        $url="/mytime";
+        
+        return view('commons/completed',['message' => $message,'redirect' => $redirect,'url'=>$url]);
+    
+    }    
+    
 }
