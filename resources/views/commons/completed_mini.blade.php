@@ -1,8 +1,15 @@
 @extends('layouts.app_mini')
 
 @section('content')
+@php
+$user = Auth::user();
+$user_name=$user -> name;
+@endphp
 
-<div class="alert alert-danger" role="alert" style="margin-top:4rem;">{{ $message }}</div>
+<div class="alert alert-danger" role="alert" style="margin-top:1rem;">{{ $user_name."さん ".$message }}<br><strong>{{ $user_name}}さんってスゴイなあ～</strong></div>
+@if($flag == "delete completed")
+<div><img src="/images/great.png"></div>
+@endif
 <div>自動的にこのウィンドウは閉じられます</div>
 
 <script>

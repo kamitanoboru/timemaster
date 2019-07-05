@@ -760,11 +760,12 @@ exit;
         
         
         //処理完了ページにメッセージとともに飛ばす
-        $message="タスクが削除されました";
+        $message="タスクの完了、お疲れ様です。";
+        $flag="delete completed";
         $redirect="マイタイムページ";
         $url="/mytime";
         
-        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id' => $list_id]);
+        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id' => $list_id, 'flag' => $flag]);
         
     }
     
