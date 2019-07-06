@@ -765,7 +765,7 @@ exit;
         $redirect="マイタイムページ";
         $url="/mytime";
         
-        return view('commons/completed_mini',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id' => $list_id, 'flag' => $flag]);
+        return view('commons/completed_mini_delete',['message' => $message,'redirect' => $redirect,'url'=>$url,'list_id' => $list_id, 'flag' => $flag]);
         
     }
     
