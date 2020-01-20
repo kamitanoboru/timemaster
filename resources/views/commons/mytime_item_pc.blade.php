@@ -46,7 +46,7 @@
                     <i class="fas fa-bookmark fa-2x imp-3"></i>
                 @endif
                 </span>
-                <span class="task_title">{{ mb_strimwidth( $task -> title , 0, 70, "...", "UTF-8" ) }}</span>
+                <span class="task_title">{{ mb_strimwidth( $task -> title , 0, 70, "...", "UTF-8" ) }}</span>({{ $task -> zone }})
 
                      
                 
