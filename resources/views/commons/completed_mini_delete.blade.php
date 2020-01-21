@@ -33,7 +33,7 @@ $user_name=$user -> name;
             $('#mdOverlay,#mdWindow',parent.document).remove();
         }
         */
-        setTimeout(func1, 4000);
+        setTimeout(func1, 1000);
         //setTimeout(func2, 2000);
     });
 -->
